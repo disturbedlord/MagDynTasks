@@ -1,0 +1,70 @@
+body {
+  overflow-x: hidden;
+}
+
+#mobile_view_table_wrapper {
+  overflow: hidden;
+}
+
+#mobile_view_table tbody tr {
+  width: 100%;
+  overflow: hidden;
+}
+
+table#inbox_table tbody tr {
+  background-color: #1c1f24 !important;
+}
+
+table#inbox_table tbody tr:hover {
+  background-color: #2a2f36 !important;
+}
+
+.swipe-green {
+  background-color: #14532d !important;
+}
+
+.swipe-red {
+  background-color: #7f1d1d !important;
+}
+
+.swipe-row {
+  touch-action: none;
+}
+
+tr.swipe-green {
+  background-color: #bbf7d0 !important;
+  /* green-200 */
+}
+
+tr.swipe-red {
+  background-color: #fecaca !important;
+  /* red-200 */
+}
+
+table tr td {
+  font-size: 12px !important;
+  font-family: verdana;
+  text-align: start !important;
+}
+
+table tr td:nth-child(3) {
+  text-align: center !important;
+}
+
+table tr th {
+  text-align: start !important;
+}
+
+.dt-paging-button {
+  padding: 3px 8px !important;
+  font-size: 12px;
+}
+
+div.dts div.dt-scroll-body,
+div.dts div.dataTables_scrollBody {
+  background: white !important;
+}
+
+div.dt-container.dt-empty-footer .dt-scroll-body {
+  border-bottom: none;
+}
