@@ -1,4 +1,4 @@
 <?php
-header("Location: New/login.php");
+header("Location: Controller/login.php");
 exit; // important to stop execution
 ?>
