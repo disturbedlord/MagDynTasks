@@ -8,7 +8,7 @@ let table = $("#mobile_view_table").DataTable({
   ordering: false,
   info: false,
   scroller: {
-    displayBuffer: 50, // default is 10× visible rows
+    displayBuffer: 100, // default is 10× visible rows
   },
   scrollCollapse: true,
   scrollY: "100vh", // 👈 important (scroll container)
@@ -26,9 +26,13 @@ let table = $("#mobile_view_table").DataTable({
       d.isAdmin = window?.APP?.user?.isAdmin;
       d.filter = {
         title: $("#filterTitle").val(),
-        description: $("#filterDescription").val(),
+        status: $("#filterStatus").val(),
         priority: $("#filterPriority").val(),
         uid: $("#filterSelectedUser").attr("data-selectedids"),
+        sortByDate: $("#sortDate").attr("data-isSelected"),
+        sortDate: $("#sortDate").attr("data-sortdate"),
+        sortByPriority: $("#sortPriority").attr("data-isSelected"),
+        sortPriority: $("#sortPriority").attr("data-sortpriority"),
       };
     },
   },
@@ -105,6 +109,7 @@ let table = $("#mobile_view_table").DataTable({
 
   drawCallback: function () {
     console.log("draw called");
+    cronParser();
     const api = this.api();
     const rowCount = api.rows({ page: "current" }).count();
     const scrollBody = $(api.table().container()).find(".dt-scroll-body");
@@ -265,7 +270,7 @@ document
     modal.dataset.id = row.dataset.id;
 
     modal.classList.remove("hidden");
-    console.log(row.dataset);
+
     // prefill
     document.getElementById("description").value =
       row.dataset.description || "";
@@ -284,6 +289,15 @@ document
       modal.querySelector("form").appendChild(hidden);
     }
     document.getElementById("taskId").value = row.dataset.id;
+    console.log("CRON CURRENT VALUE : ", document.getElementById("cron").value);
+    const cronField = document.getElementById("cron");
+    const cronValidator = document.getElementById("cronValidator");
+    console.log("modal opened", cronField.value);
+    if (cronField.value !== "") {
+      cronValidator.style.display = "block";
+      cronValidator.innerText =
+        cronField.value !== "" ? cronToShortText(cronField.value) : "";
+    }
   });
 
 document.addEventListener(
@@ -339,6 +353,7 @@ document.addEventListener(
       $("#filterPriority").val("");
       $("#filterSelectedUser").val("");
       $("#filterSelectedUser").attr("data-selectedids", "");
+      $("#filterStatus").val("");
       isFilterApplied = true;
       table.ajax.reload();
     });

@@ -1,5 +1,3 @@
-<?php
-?>
 <!-- Modal backdrop -->
 <div id="TaskModal" class="p-2 fixed inset-0 bg-black/80 flex items-center justify-center hidden z-50 overflow-auto">
     <!-- Modal container -->
@@ -34,16 +32,22 @@
                     <textarea id="description" name="description" rows="3" maxlength="250"
                         class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Enter task description" required></textarea>
-                    <p class="text-sm text-gray-400 mt-1">0 / 250 characters</p>
                 </div>
 
                 <!-- Cron Command -->
                 <div>
-                    <label for="cron" class="block text-gray-700 font-medium mb-1">Cron Command</label>
+                    <div class="flex flex-row space-x-2"><label for="cron"
+                            class="block text-gray-700 font-medium mb-1">Cron Command</label>
+                        <span id="cronValidator" style="display:none"
+                            class="inline-flex items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-500 inset-ring inset-ring-gray-400/20"></span>
+                    </div>
+
                     <input type="text" id="cron" name="cron"
                         class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Optional cron command">
+
                 </div>
+
 
                 <!-- Priority -->
                 <div>
@@ -110,12 +114,30 @@
         const modal = document.getElementById('TaskModal');
         const openBtn = document.getElementById('openModalBtn'); // your open button
         const form = document.getElementById('TaskForm');
+        const cronField = document.getElementById("cron");
+        const cronValidator = document.getElementById("cronValidator");
+
+        cronField.addEventListener("input", (e) => {
+
+            const currentCronValue = cronField.value;
+            if (currentCronValue !== "") {
+                cronValidator.style.display = "block";
+            } else {
+                cronValidator.style.display = "none";
+            }
+            const cronValidation = cronToShortText(currentCronValue);
+
+            cronValidator.innerText = currentCronValue === "" ? "" : cronValidation;
+
+        })
 
         const closeBtns = [document.getElementById('closeTaskModal'), document.getElementById('closeTask')];
 
         openBtn?.addEventListener('click', () => {
             modal.classList.remove('hidden');
             modal.dataset.mode = 'addTask';
+            // incase of edit validate on modal load
+
         });
         closeBtns.forEach(btn => btn?.addEventListener('click', () => modal.classList.add('hidden')));
 

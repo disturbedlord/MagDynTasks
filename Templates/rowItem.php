@@ -1,5 +1,5 @@
 <div class="<?= $borderColor ?> border-l-8 flex flex-row">
-    <div class="w-[80%] gap-4 flex items-center justify-between px-4 py-3">
+    <div class="w-[80%] gap-4 flex items-center justify-between px-3 py-3">
 
         <div class="flex flex-col gap-1 w-full">
             <div class="flex justify-between items-start">
@@ -17,19 +17,21 @@
 
             <div class="flex flex-row justify-between">
                 <div>
-                <span
-                    class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 inset-ring inset-ring-indigo-700/10">
-                    <?= htmlspecialchars($name) ?>
-                </span>
+                    <span
+                        class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 inset-ring inset-ring-indigo-700/10">
+                        <?= htmlspecialchars($name) ?>
+                    </span>
 
-                <span
-                    class="ml-4 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium inset-ring capitalize <?= $statusColor ?>">
-                    <?= htmlspecialchars($status) ?>
-                </span>
+                    <span
+                        class="ml-4 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium inset-ring capitalize <?= $statusColor ?>">
+                        <?= htmlspecialchars($status) ?>
+                    </span>
                 </div>
-              <?php if (!empty($cron)): ?>
-                    <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 inset-ring inset-ring-gray-500/10">
+                <?php if (!empty($cron)): ?>
+                    <span
+                        class="cronText inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 inset-ring inset-ring-gray-500/10">
                         <?= htmlspecialchars($cron) ?>
+
                     </span>
                 <?php endif; ?>
             </div>

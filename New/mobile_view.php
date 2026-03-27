@@ -124,6 +124,7 @@ while ($row = $allUsersResult->fetch_assoc()) {
     ?>
     <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-2"></div>
     <script src="../Script/mobile_view.js"></script>
+    <script src="../Script/cronParser.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 
 </body>

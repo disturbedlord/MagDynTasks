@@ -14,10 +14,16 @@ $isAdminFlag = $_GET["isAdmin"] ?? false;
 $filter = $_GET['filter'] ?? [];
 
 $title = $filter['title'] ?? '';
-$description = $filter['description'] ?? '';
+$status = $filter['status'] ?? '';
 $priority = $filter['priority'] ?? '';
+$sortDate = $filter["sortDate"] ?? "0";
+$sortByDate = $filter["sortByDate"] === "1" ?? false; // Boolean to track whether Date sort is selected
+$sortPriority = $filter["sortPriority"] ?? "0";
+$sortByPriority = $filter["sortByPriority"] === "1" ?? false; // Boolean to track whether Priority sort is selected
+
 $uid = $filter['uid'] ?? '';
 $uidArray = explode(",", $uid);
+
 
 $appliedFilters = [];
 
@@ -54,7 +60,7 @@ if (!$isAdminFlag) {
     $isWHEREAdded = true;
 }
 
-if (($title || $description || $priority || $uid) && $isAdminFlag) {
+if (($title || $status !== '' || $priority || $uid) && $isAdminFlag) {
     // If $isAdminFlag and first render, then filter will be empty and no WHERE clause in $query
     // if !$isAdminFlag then always has a WHERE clause due to default search
     // So Add WHERE clause in case if some filter is truthy and is Admin 
@@ -68,11 +74,6 @@ if ($title) {
     $params[] = "%{$title}%";
     $types .= "s";
 }
-if ($description) {
-    $appliedFilters[] = $searchDescription;
-    $params[] = "%{$description}%";
-    $types .= "s";
-}
 if ($priority) {
     $appliedFilters[] = $searchPriority;
     $params[] = $priority;
@@ -83,16 +84,29 @@ if ($uid) {
     $appliedFilters[] = " e.uid in ({$placeholder})";
     $params = array_merge($params, $uidArray);
     $types .= implode("", array_fill(0, count($uidArray), "i"));
-
+}
+if ($status !== '') {
+    $appliedFilters[] = $searchStatus;
+    $params[] = $status;
+    $types .= "i";
 }
 
 $query .= implode(" AND ", $appliedFilters);
 
 
 
-// ✅ ORDER + LIMIT (REQUIRED for DataTables)
-$query .= " ORDER BY e.time DESC LIMIT ?, ?";
+$query .= " ORDER BY ";
 
+if ($sortByDate) {
+    $sortDateValue = $sortDate === "0" ? "ASC" : "DESC";
+    $query .= "e.time {$sortDateValue} ";
+} else if ($sortByPriority) {
+    $sortPriorityValue = $sortPriority === "0" ? "ASC" : "DESC";
+    $query .= " CAST(e.priority AS UNSIGNED) {$sortPriorityValue} ";
+}
+
+// ✅ ORDER + LIMIT (REQUIRED for DataTables)
+$query .= " LIMIT ?, ?";
 
 $params[] = $start;
 $params[] = $length;
@@ -127,7 +141,8 @@ while ($row = $result->fetch_assoc()) {
     $description = $row["description"];
     $userId = $row["user_account_id"];
     // 🕒 Format time
-    $time = date("g:iA", strtotime($row['time']));
+    $time = date("d M, g:i A", strtotime($row['time']));
+    ;
     $priority = $row['priority_id'];
     $department = $row["department"];
     // 🎨 Status color
