@@ -177,7 +177,6 @@
 
                 document.getElementById("dateSortIcon").classList = currentSort === "0" ? "text-2xl bi bi-sort-down-alt" : "text-2xl bi bi-sort-up-alt"
                 // Your sorting logic here
-                console.log("Sort:", currentSort === "0" ? "ASC" : "DESC");
             });
 
             document.getElementById("sortPriority").addEventListener("click", () => {
@@ -189,7 +188,6 @@
 
                 document.getElementById("prioritySortIcon").classList = currentSort === "0" ? "text-2xl bi bi-sort-numeric-down" : "text-2xl bi bi-sort-numeric-up"
                 // Your sorting logic here
-                console.log("Sort:", currentSort === "0" ? "ASC" : "DESC");
             });
 
             const modal = document.getElementById('filterModal');

@@ -1,5 +1,4 @@
 function cronToShortText(cron) {
-  console.log(cron);
   // Split cron expression into parts
   const parts = cron.trim().split(" ");
 
