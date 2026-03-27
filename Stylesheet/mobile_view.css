@@ -68,3 +68,12 @@ div.dts div.dataTables_scrollBody {
 div.dt-container.dt-empty-footer .dt-scroll-body {
   border-bottom: none;
 }
+
+.dt-scroll-body {
+  overflow-y: auto !important;
+}
+
+/* Remove any extra space DataTables injects */
+.dt-scroll-body > div {
+  height: auto !important;
+}

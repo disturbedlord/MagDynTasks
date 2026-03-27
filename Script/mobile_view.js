@@ -2,23 +2,23 @@
 let isFilterApplied = false;
 
 let table = $("#mobile_view_table").DataTable({
-  serverSide: true,
-  paging: true,
+  serverSide: false,
+  paging: false, // 👈 let server return all rows at once
   searching: false,
   ordering: false,
   info: false,
-  scroller: {
-    displayBuffer: 100, // default is 10× visible rows
-  },
+  // 👇 Remove scroller entirely, use plain CSS scroll
+  scrollY: "calc(100vh - 64px)",
   scrollCollapse: true,
-  scrollY: "100vh", // 👈 important (scroll container)
+
   ajax: {
     url: "../Modal/fetchTable.php",
     beforeSend: function () {},
     complete: function () {
       if (isFilterApplied) {
         showToast("Filter applied successfully!", "success");
-        isFilterApplied = !isFilterApplied;
+        isFilterApplied = false;
+        reloadTable();
       }
     },
     data: function (d) {
@@ -41,7 +41,7 @@ let table = $("#mobile_view_table").DataTable({
     topStart: null,
     topEnd: null,
     bottomStart: null,
-    bottomEnd: null, // 👈 removes pagination too
+    bottomEnd: null,
   },
 
   columns: [
@@ -57,42 +57,15 @@ let table = $("#mobile_view_table").DataTable({
   ],
 
   columnDefs: [
-    {
-      targets: 0,
-      visible: false,
-    },
-    {
-      targets: 8,
-      className: "p-0",
-    },
-    {
-      targets: 2, // 👈 hide task column
-      visible: false,
-    },
-    {
-      targets: 3, // 👈 hide task column
-      visible: false,
-    },
-    {
-      targets: 4, // 👈 hide task column
-      visible: false,
-    },
-    {
-      targets: 5, // 👈 hide task column
-      visible: false,
-    },
-    {
-      targets: 6, // 👈 hide task column
-      visible: false,
-    },
-    {
-      targets: 1, // 👈 hide task column
-      visible: false,
-    },
-    {
-      targets: 7, // 👈 hide task column
-      visible: false,
-    },
+    { targets: 0, visible: false },
+    { targets: 1, visible: false },
+    { targets: 2, visible: false },
+    { targets: 3, visible: false },
+    { targets: 4, visible: false },
+    { targets: 5, visible: false },
+    { targets: 6, visible: false },
+    { targets: 7, visible: false },
+    { targets: 8, className: "p-0" },
   ],
 
   createdRow: function (row, data) {
@@ -100,37 +73,23 @@ let table = $("#mobile_view_table").DataTable({
     $(row).attr("data-id", data[0]);
     $(row).attr("data-description", data[1]);
     $(row).attr("data-status", data[2]);
-    $(row).attr("data-title", data[3]); // Add title
-    $(row).attr("data-priority", data[4]); // Add priority
-    $(row).attr("data-user", data[5]); // Add user id
-    $(row).attr("data-cron", data[6]); // Add cron
-    $(row).attr("data-department", data[7]); // Add cron
+    $(row).attr("data-title", data[3]);
+    $(row).attr("data-priority", data[4]);
+    $(row).attr("data-user", data[5]);
+    $(row).attr("data-cron", data[6]);
+    $(row).attr("data-department", data[7]);
   },
 
+  // 👇 Clean drawCallback — no height manipulation
   drawCallback: function () {
-    console.log("draw called");
     cronParser();
-    const api = this.api();
-    const rowCount = api.rows({ page: "current" }).count();
-    const scrollBody = $(api.table().container()).find(".dt-scroll-body");
-    if (scrollBody && rowCount < 6) {
-      // few rows → remove scroll
-      // Get Scroll Body height
-      const table = document.getElementById("mobile_view_table");
-      const height = table.offsetHeight;
+    attachSwipe();
+    const modal = document.getElementById("filterModal");
+    const overlay = document.getElementById("filterOverlay");
 
-      const dt_scrollBody = scrollBody[0];
-      dt_scrollBody.style = `position: relative;height: ${height + 80}px;`;
-    } else {
-      const table = document.getElementById("mobile_view_table");
-      const height = table.offsetHeight;
-      const dt_scrollBody = scrollBody[0];
-      dt_scrollBody.style = `position: relative; overflow: auto; height: ${height + 80}px;`;
-    }
-
-    attachSwipe(); // reuse your swipe logic
-    // close filter modal
-    window.closeFilter();
+    modal.classList.add("translate-y-full");
+    overlay.classList.add("hidden");
+    document.body.classList.remove("overflow-hidden");
   },
 });
 
@@ -145,6 +104,13 @@ $("#user_select").on("change", function () {
 
 const reloadTable = () => {
   table.ajax.reload(null, false);
+
+  setTimeout(() => {
+    document
+      .querySelector(".dt-scroll-body")
+      .scrollTo({ top: 0, behavior: "instant" });
+  }, 50);
+  console.log("SCROLL TO TOP");
 };
 
 function attachSwipe() {
@@ -154,7 +120,7 @@ function attachSwipe() {
 
     let startX = 0;
     let currentX = 0;
-    let threshold = 80;
+    let threshold = 100;
 
     row.addEventListener("touchstart", (e) => {
       startX = e.touches[0].clientX;

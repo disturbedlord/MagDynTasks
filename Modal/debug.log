@@ -13595,3 +13595,4490 @@ Array
     [1] => 2200
 )
 
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 0
+    [1] => 2700
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 0
+    [1] => 2700
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 0
+    [1] => 135
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 57
+    [1] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 0
+    [1] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 28
+    [1] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 0
+    [1] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 0
+    [1] => 135
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 57
+    [1] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 0
+    [1] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 28
+    [1] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 4
+    [1] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 32
+    [1] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 57
+    [1] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 0
+    [1] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 0
+    [1] => 0
+    [2] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 0
+    [1] => 2
+    [2] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 0
+    [1] => 0
+    [2] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 1
+    [1] => 0
+    [2] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 1
+    [1] => 30
+    [2] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 1
+    [1] => 0
+    [2] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 1
+    [1] => 30
+    [2] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 1
+    [1] => 0
+    [2] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 1
+    [1] => 30
+    [2] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC  LIMIT ?, ?
+Array
+(
+    [0] => 1
+    [1] => 0
+    [2] => 40
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 1
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 1
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 1
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 1
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 1
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 1
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time DESC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY e.time DESC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) ASC 
+Array
+(
+    [0] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? ORDER BY e.time ASC 
+Array
+(
+    [0] => 2
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 2
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 2
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? AND  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 2
+    [1] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? AND  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 2
+    [1] => 0
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? AND  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 2
+    [1] => 1
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? AND  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 2
+    [1] => 1
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? AND  e.title LIKE  ?  AND  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 2
+    [1] => %Meet%
+    [2] => 1
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? AND  e.title LIKE  ?  AND  e.done = ?  ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 2
+    [1] => %Meet%
+    [2] => 1
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 2
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 2
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? AND  e.title LIKE  ?  ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 2
+    [1] => %Ing%
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? AND  e.title LIKE  ?  ORDER BY  CAST(e.priority AS UNSIGNED) DESC 
+Array
+(
+    [0] => 2
+    [1] => %Ing%
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? ORDER BY e.time ASC 
+Array
+(
+    [0] => 2
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? ORDER BY e.time ASC 
+Array
+(
+    [0] => 2
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? ORDER BY e.time ASC 
+Array
+(
+    [0] => 2
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid ORDER BY e.time ASC 
+Array
+(
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? ORDER BY e.time ASC 
+Array
+(
+    [0] => 2
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? ORDER BY e.time ASC 
+Array
+(
+    [0] => 2
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? ORDER BY e.time ASC 
+Array
+(
+    [0] => 2
+)
+
+Array
+(
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid WHERE e.uid = ? ORDER BY e.time ASC 
+Array
+(
+    [0] => 2
+)
+

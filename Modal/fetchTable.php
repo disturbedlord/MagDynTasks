@@ -105,12 +105,12 @@ if ($sortByDate) {
     $query .= " CAST(e.priority AS UNSIGNED) {$sortPriorityValue} ";
 }
 
-// ✅ ORDER + LIMIT (REQUIRED for DataTables)
-$query .= " LIMIT ?, ?";
+// // ✅ ORDER + LIMIT (REQUIRED for DataTables)
+// $query .= " LIMIT ?, ?";
 
-$params[] = $start;
-$params[] = $length;
-$types .= "ii";
+// $params[] = $start;
+// $params[] = $length;
+// $types .= "ii";
 
 
 file_put_contents(
@@ -122,7 +122,8 @@ file_put_contents(
 );
 
 $stmt = $con->prepare($query);
-$stmt->bind_param($types, ...$params);
+if (count($params) > 0)
+    $stmt->bind_param($types, ...$params);
 
 
 
