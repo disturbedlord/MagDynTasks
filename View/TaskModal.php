@@ -160,7 +160,7 @@
             const department = document.getElementById('department').value;
 
             if (!description || !user) {
-                alert("Task and User are required");
+                alert("User is required");
                 return;
             }
 
