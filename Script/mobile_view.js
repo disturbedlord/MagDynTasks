@@ -110,7 +110,6 @@ const reloadTable = () => {
       .querySelector(".dt-scroll-body")
       .scrollTo({ top: 0, behavior: "instant" });
   }, 50);
-  console.log("SCROLL TO TOP");
 };
 
 function attachSwipe() {
@@ -245,7 +244,6 @@ document
     document.getElementById("user").value = row.dataset.user || "";
     document.getElementById("cron").value = row.dataset.cron || "";
     document.getElementById("department").value = row.dataset.department || "";
-    console.log("User : ", row.dataset.user);
     // hidden id for editing
     if (!document.getElementById("taskId")) {
       const hidden = document.createElement("input");
@@ -255,10 +253,8 @@ document
       modal.querySelector("form").appendChild(hidden);
     }
     document.getElementById("taskId").value = row.dataset.id;
-    console.log("CRON CURRENT VALUE : ", document.getElementById("cron").value);
     const cronField = document.getElementById("cron");
     const cronValidator = document.getElementById("cronValidator");
-    console.log("modal opened", cronField.value);
     if (cronField.value !== "") {
       cronValidator.style.display = "block";
       cronValidator.innerText =
