@@ -9,7 +9,7 @@ $start = $_GET['start'] ?? 0;
 $length = $_GET['length'] ?? 10;
 $loggedInUserId = $_GET["loggedInUserId"];
 $isAdminFlag = $_GET["isAdmin"] ?? false;
-
+$export = $_GET["export"] ?? false;
 // Nested filter
 $filter = $_GET['filter'] ?? [];
 
@@ -178,10 +178,17 @@ while ($row = $result->fetch_assoc()) {
     ];
 }
 
-// 📤 RESPONSE
-echo json_encode([
-    "draw" => intval($draw),
-    "recordsTotal" => intval($totalData),
-    "recordsFiltered" => intval($totalData),
-    "data" => $data
-]);
+if ($export) {
+    // CSV export, no need for draw
+    echo json_encode([
+        "data" => $data
+    ]);
+} else {
+    // ListView RESPONSE
+    echo json_encode([
+        "draw" => intval($draw),
+        "recordsTotal" => intval($totalData),
+        "recordsFiltered" => intval($totalData),
+        "data" => $data
+    ]);
+}

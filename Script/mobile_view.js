@@ -22,6 +22,7 @@ let table = $("#mobile_view_table").DataTable({
       }
     },
     data: function (d) {
+      d.export = false;
       d.loggedInUserId = window?.APP?.user?.id;
       d.isAdmin = window?.APP?.user?.isAdmin;
       d.filter = {
@@ -377,3 +378,76 @@ function showToast(message, type = "success") {
     setTimeout(() => toast.remove(), 300);
   }, 3000);
 }
+
+$("#exportCSV").click(async () => {
+  // Build payload
+
+  $.ajax({
+    url: "../Modal/fetchTable.php",
+    type: "GET",
+    data: {
+      export: true,
+      loggedInUserId: window?.APP?.user?.id,
+      isAdmin: window?.APP?.user?.isAdmin,
+      filter: {
+        title: $("#filterTitle").val(),
+        status: $("#filterStatus").val(),
+        priority: $("#filterPriority").val(),
+        uid: $("#filterSelectedUser").attr("data-selectedids"),
+        sortByDate: $("#sortDate").attr("data-isSelected"),
+        sortDate: $("#sortDate").attr("data-sortdate"),
+        sortByPriority: $("#sortPriority").attr("data-isSelected"),
+        sortPriority: $("#sortPriority").attr("data-sortpriority"),
+      },
+    },
+    success: function (response) {
+      const rows = response.data;
+
+      if (!rows || rows.length === 0) {
+        showToast("No data to export", "error");
+        return;
+      }
+
+      // CSV Headers
+      const headers = ["ID", "Title", "Description", "Status", "Department ID"];
+
+      // Build CSV rows — skip index 8 (HTML)
+      const csvRows = rows.map(function (row) {
+        return [
+          row[0], // ID
+          row[3], // Title
+          row[1], // Description (multiline — wrap in quotes)
+          row[2], // Status
+          row[7], // Department ID
+        ].map(function (cell) {
+          // Escape cell: wrap in quotes, escape inner quotes
+          const val = String(cell ?? "").replace(/"/g, '""');
+          return `"${val}"`;
+        });
+      });
+
+      // Combine headers + rows
+      const csvContent = [
+        headers.join(","),
+        ...csvRows.map((r) => r.join(",")),
+      ].join("\n");
+
+      // Trigger download
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.setAttribute("href", url);
+      link.setAttribute("download", "export_" + Date.now() + ".csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      showToast("Export Completed", "success");
+    },
+    error: function (xhr, status, error) {
+      console.error("Export failed:", error);
+    },
+  });
+});
