@@ -404,7 +404,7 @@ $("#exportCSV").click(async () => {
       const rows = response.data;
 
       if (!rows || rows.length === 0) {
-        showToast("No data to export.", "error");
+        showToast("No data to export", "error");
         return;
       }
 
