@@ -22,6 +22,14 @@ LEFT JOIN user_account d
  ON d.user_account_id = e.uid
  LEFT JOIN user_account d2 on e.department = d2.user_account_id ";
 
+$EVENTQUERYCOUNT = "
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id ";
+
 $searchTitle = " e.title LIKE  ? ";
 $searchDescription = " e.description LIKE  ? ";
 $searchStatus = " e.done = ? ";

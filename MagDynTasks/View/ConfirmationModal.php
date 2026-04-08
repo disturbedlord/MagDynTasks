@@ -37,7 +37,7 @@
 
             titleEl.textContent = title;
             messageEl.textContent = message;
-
+            messageEl.classList += " break-words [overflow-wrap:anywhere] ";
             modal.classList.remove("hidden");
             modal.classList.add("flex");
 

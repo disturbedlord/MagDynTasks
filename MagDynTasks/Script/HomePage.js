@@ -1,132 +1,102 @@
 // flag to check if filter is applied
 let isFilterApplied = false;
 
-let table = $("#mobile_view_table").DataTable({
-  serverSide: false,
-  paging: false, // 👈 let server return all rows at once
-  searching: false,
-  ordering: false,
-  info: false,
-  // 👇 Remove scroller entirely, use plain CSS scroll
-  scrollY: "calc(100vh - 64px)",
-  scrollCollapse: true,
+// let table = $("#mobile_view_table").DataTable({
+//   serverSide: false,
+//   paging: false, // 👈 let server return all rows at once
+//   searching: false,
+//   ordering: false,
+//   info: false,
+//   // 👇 Remove scroller entirely, use plain CSS scroll
+//   scrollY: "calc(100vh - 64px)",
+//   scrollCollapse: true,
+//   processing: true,
+//   scroller: false,
 
-  ajax: {
-    url: "../Modal/fetchTable.php",
-    beforeSend: function () {
-      $("#loader").toggleClass("hidden");
-      $("#loaderText").text("Fetching Latest Data");
-    },
-    complete: function (data) {
-      if (!$("#loader").hasClass("hidden")) {
-        $("#loader").toggleClass("hidden");
-      }
+//   pageLength: 20,
+//   paging: false,
 
-      if (isFilterApplied) {
-        showToast("Filter applied successfully!", "success");
-        isFilterApplied = false;
-        reloadTable(true);
-      }
+//   layout: {
+//     topStart: null,
+//     topEnd: null,
+//     bottomStart: null,
+//     bottomEnd: null,
+//   },
 
-      if (data) {
-        const recordCount = data?.responseJSON?.data?.length;
-        const recordsCountDiv = $("#recordsCount");
-        recordsCountDiv.text(`${recordCount} Records`);
-      }
-    },
-    data: function (d) {
-      d.export = false;
+//   columns: [
+//     { data: 0 },
+//     { data: 1 },
+//     { data: 2 },
+//     { data: 3 },
+//     { data: 4 },
+//     { data: 5 },
+//     { data: 6 },
+//     { data: 7 },
+//     { data: 8 },
+//   ],
 
-      d.loggedInUserId = window?.APP?.user?.id;
-      d.isAdmin = window?.APP?.user?.isAdmin;
-      d.filter = {
-        title: $("#filterTitle").val(),
-        status: $("#filterStatus").val(),
-        priority: $("#filterPriority").val(),
-        uid: $("#filterSelectedUser").attr("data-selectedids"),
-        sortByDate: $("#sortDate").attr("data-isSelected"),
-        sortDate: $("#sortDate").attr("data-sortdate"),
-        sortByPriority: $("#sortPriority").attr("data-isSelected"),
-        sortPriority: $("#sortPriority").attr("data-sortpriority"),
-      };
-    },
-  },
+//   columnDefs: [
+//     { targets: 0, visible: false },
+//     { targets: 1, visible: false },
+//     { targets: 2, visible: false },
+//     { targets: 3, visible: false },
+//     { targets: 4, visible: false },
+//     { targets: 5, visible: false },
+//     { targets: 6, visible: false },
+//     { targets: 7, visible: false },
+//     { targets: 8, className: "p-0" },
+//   ],
 
-  layout: {
-    topStart: null,
-    topEnd: null,
-    bottomStart: null,
-    bottomEnd: null,
-  },
+//   createdRow: function (row, data) {
+//     $(row).addClass("swipe-row border-b border-gray-300 bg-[#1c1f24]");
+//     $(row).attr("data-id", data[0]);
+//     $(row).attr("data-description", data[1]);
+//     $(row).attr("data-status", data[2]);
+//     $(row).attr("data-title", data[3]);
+//     $(row).attr("data-priority", data[4]);
+//     $(row).attr("data-user", data[5]);
+//     $(row).attr("data-cron", data[6]);
+//     $(row).attr("data-department", data[7]);
+//     // we'll inject pageIndex dynamically
+//     if (data._page !== undefined) {
+//       $(row).attr("data-page", data._page);
+//     }
+//   },
 
-  columns: [
-    { data: 0 },
-    { data: 1 },
-    { data: 2 },
-    { data: 3 },
-    { data: 4 },
-    { data: 5 },
-    { data: 6 },
-    { data: 7 },
-    { data: 8 },
-  ],
+//   // 👇 Clean drawCallback — no height manipulation
+//   drawCallback: function () {
+//     cronParser();
+//     attachSwipe();
+//     const modal = document.getElementById("filterModal");
+//     const overlay = document.getElementById("filterOverlay");
 
-  columnDefs: [
-    { targets: 0, visible: false },
-    { targets: 1, visible: false },
-    { targets: 2, visible: false },
-    { targets: 3, visible: false },
-    { targets: 4, visible: false },
-    { targets: 5, visible: false },
-    { targets: 6, visible: false },
-    { targets: 7, visible: false },
-    { targets: 8, className: "p-0" },
-  ],
-
-  createdRow: function (row, data) {
-    $(row).addClass("swipe-row border-b border-gray-300 bg-[#1c1f24]");
-    $(row).attr("data-id", data[0]);
-    $(row).attr("data-description", data[1]);
-    $(row).attr("data-status", data[2]);
-    $(row).attr("data-title", data[3]);
-    $(row).attr("data-priority", data[4]);
-    $(row).attr("data-user", data[5]);
-    $(row).attr("data-cron", data[6]);
-    $(row).attr("data-department", data[7]);
-  },
-
-  // 👇 Clean drawCallback — no height manipulation
-  drawCallback: function () {
-    cronParser();
-    attachSwipe();
-    const modal = document.getElementById("filterModal");
-    const overlay = document.getElementById("filterOverlay");
-
-    modal.classList.add("translate-y-full");
-    overlay.classList.add("hidden");
-    document.body.classList.remove("overflow-hidden");
-  },
-});
+//     modal.classList.add("translate-y-full");
+//     overlay.classList.add("hidden");
+//     document.body.classList.remove("overflow-hidden");
+//   },
+// });
 
 $("#back_button").click(() => {
   window.open("./inventory_task.php", "_self");
 });
 
+const scrollToTop = () => {
+  setTimeout(() => {
+    document
+      .querySelector("#scroll-container")
+      .scrollTo({ top: 0, behavior: "instant" });
+  }, 50);
+};
+
 const reloadTable = (isFilterReload) => {
-  table.ajax.reload(null, false);
-  if (isFilterReload) {
-    setTimeout(() => {
-      document
-        .querySelector(".dt-scroll-body")
-        .scrollTo({ top: 0, behavior: "instant" });
-    }, 50);
-  }
+  scrollToTop();
 };
 
 function attachSwipe() {
-  document.querySelectorAll(".swipe-row").forEach((row) => {
+  document.querySelectorAll(".swipe-row").forEach((row, rowIndex) => {
     // read status from dataset
     const isDone = row.dataset.status === "finished";
+    const rowCard = row.querySelector("div");
 
     let startX = 0;
     let currentX = 0;
@@ -148,29 +118,28 @@ function attachSwipe() {
       }
 
       row.style.transform = `translateX(${currentX}px)`;
-
       if (currentX > 0) {
         if (!isDone) {
-          row.classList.add("swipe-green");
-          row.classList.remove("swipe-red");
+          rowCard.classList.add("swipe-green");
+          rowCard.classList.remove("swipe-red");
           row.setAttribute("data-swipeActivity", "markFinished");
         } else {
-          row.classList.add("swipe-yellow");
-          row.classList.remove("swipe-red");
-          row.classList.remove("swipe-green");
+          rowCard.classList.add("swipe-yellow");
+          rowCard.classList.remove("swipe-red");
+          rowCard.classList.remove("swipe-green");
           row.setAttribute("data-swipeActivity", "markPending");
         }
       } else {
-        row.classList.add("swipe-red");
-        row.classList.remove("swipe-green");
+        rowCard.classList.add("swipe-red");
+        rowCard.classList.remove("swipe-green");
         row.setAttribute("data-swipeActivity", "delete");
       }
     });
 
     row.addEventListener("touchend", async () => {
-      row.classList.remove("swipe-green");
-      row.classList.remove("swipe-yellow");
-      row.classList.remove("swipe-red");
+      rowCard.classList.remove("swipe-green");
+      rowCard.classList.remove("swipe-yellow");
+      rowCard.classList.remove("swipe-red");
 
       let task = row.dataset.title;
       const rowActivity = row.getAttribute("data-swipeActivity");
@@ -192,15 +161,16 @@ function attachSwipe() {
           })
             .then((res) => res.json())
             .then((data) => {
-              $("#loader").toggleClass("hidden");
-
               if (data.status === "success") {
-                row.remove(); // remove only after success
-                reloadTable(false);
-                showToast("Task deleted successfully!", "success");
+                const pageNo = parseInt(row.getAttribute("data-page"));
+
+                if (RemoveSpecificRow(pageNo, rowIndex)) {
+                  showToast("Task deleted successfully!", "success");
+                }
               } else {
                 showToast(data.message || "Delete failed", "error");
               }
+              $("#loader").toggleClass("hidden");
             });
         } else {
           // ❌ NO clicked
@@ -208,7 +178,7 @@ function attachSwipe() {
         }
       } else if (currentX > threshold) {
         const confirmed = await showConfirm({
-          title: "Mark Finished",
+          title: `Mark ${rowActivity === "markFinished" ? "Finished" : "Pending"}`,
           message: `Mark "${task}" as ${rowActivity === "markFinished" ? "finished" : "pending"}?`,
         });
         if (confirmed) {
@@ -223,18 +193,25 @@ function attachSwipe() {
           })
             .then((res) => res.json())
             .then((data) => {
-              $("#loader").toggleClass("hidden");
-
               if (data.status === "success") {
-                reloadTable(false);
-                showToast(
-                  "Task marked " +
-                    (rowActivity === "markFinished" ? "finished!" : "pending!"),
-                  "success",
-                );
+                const pageNo = parseInt(row.getAttribute("data-page"));
+
+                if (UpdateSpecificRow(pageNo, rowIndex, data.data)) {
+                  showToast(
+                    "Task marked " +
+                      (rowActivity === "markFinished"
+                        ? "finished!"
+                        : "pending!"),
+                    "success",
+                  );
+                }
               } else {
                 showToast(data.message || "Task couldn't be updated", "error");
               }
+              $("#loader").toggleClass("hidden");
+            })
+            .catch((err) => {
+              console.error("API Call Error : ", err);
             });
         } else {
           // ❌ NO clicked
@@ -253,7 +230,7 @@ function escHandler(e) {
 document.addEventListener("keydown", escHandler);
 
 document
-  .querySelector("#mobile_view_table")
+  .querySelector("#scroll-content")
   .addEventListener("click", function (e) {
     const btn = e.target.closest('button[name="editBtn"]');
     if (!btn) return;
@@ -261,9 +238,14 @@ document
     const row = btn.closest("tr");
     if (!row) return;
 
+    const rowIndex = $(row).prevAll("tr").length - 1;
+    const pageNo = $(row).data("page");
+
     const modal = document.getElementById("TaskModal");
     modal.dataset.mode = "editTask";
     modal.dataset.id = row.dataset.id;
+    modal.dataset.pageNo = pageNo;
+    modal.dataset.rowIndex = rowIndex;
 
     modal.classList.remove("hidden");
 
@@ -274,7 +256,19 @@ document
     document.getElementById("priority").value = row.dataset.priority || "1";
     document.getElementById("user").value = row.dataset.user || "";
     document.getElementById("cron").value = row.dataset.cron || "";
-    document.getElementById("department").value = row.dataset.department || "";
+    const description = document.getElementById("description");
+
+    const descCounter = document.getElementById("descriptionLengthCounter");
+    descCounter.innerText = `${description.value.length} / 250`;
+
+    if (description.value.length >= 250) {
+      descCounter.style = " color : #EF4646; ";
+      $("#submitBtn").prop("disabled", true);
+    } else {
+      descCounter.style = " color : black";
+      $("#submitBtn").prop("disabled", false);
+    }
+
     // hidden id for editing
     if (!document.getElementById("taskId")) {
       const hidden = document.createElement("input");
@@ -401,7 +395,6 @@ $("#exportCSV").click(async () => {
     url: "../Modal/fetchTable.php",
     type: "GET",
     data: {
-      export: true,
       loggedInUserId: window?.APP?.user?.id,
       isAdmin: window?.APP?.user?.isAdmin,
       filter: {
@@ -481,3 +474,21 @@ $("#exportCSV").click(async () => {
     },
   });
 });
+
+const toast = document.getElementById("toast");
+const toastText = document.getElementById("toastText");
+
+function showToast1(message = "Loading...") {
+  toastText.textContent = message;
+
+  // move into view
+  toast.classList.remove("bottom-[-100px]");
+  toast.classList.add("bottom-6");
+  toast.classList.add("text-sm");
+}
+
+function hideToast1() {
+  // slide out
+  toast.classList.remove("bottom-6");
+  toast.classList.add("bottom-[-100px]");
+}

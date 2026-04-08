@@ -104,14 +104,15 @@
         <div class="flex flex-row justify-center space-x-2 px-6 py-3 border-t border-gray-200">
             <button type="button" id="closeTask"
                 class="text-sm px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Close</button>
-            <button type="submit" form="TaskForm"
-                class="text-sm px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save Task</button>
+            <button id="submitBtn" type="submit" form="TaskForm"
+                class="text-sm px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-50">Save
+                Task</button>
         </div>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', (element) => {
 
         const modal = document.getElementById('TaskModal');
         const openBtn = document.getElementById('openModalBtn'); // your open button
@@ -121,18 +122,34 @@
         const description = document.getElementById("description");
         const descriptionCounter = $("#descriptionLengthCounter");
 
+
+
         // Listen to textarea Description and update count
         description.addEventListener("input", (e) => {
             const enteredValue = e.target.value;
             if (typeof enteredValue === "string") {
-                setDescriptionCounter(enteredValue);
+                const setLength = setDescriptionCounter(enteredValue);
+                if (setLength >= 250) {
+                    descriptionCounter.css("color", "#ef4646");
+                    $("#submitBtn").prop("disabled", true);
+                } else {
+                    descriptionCounter.css("color", "black");
+                    $("#submitBtn").prop("disabled", false);
+
+                }
             }
+
+
+
         })
 
         const setDescriptionCounter = (value) => {
             const length = String(value).length;
             descriptionCounter.text(`${length} / 250 characters`);
+            return length;
         }
+
+
 
         // set all input fields to default values
 
@@ -175,6 +192,8 @@
         form.addEventListener('submit', (e) => {
             e.preventDefault(); // prevent page reload
 
+
+
             const description = document.getElementById('description').value.trim();
             const cron = document.getElementById('cron').value.trim();
             const priority = document.getElementById('priority').value;
@@ -208,20 +227,24 @@
                         else
                             showToast(data.message || "Task Created successfully", "success");
 
-                        // persist user across add task
-                        const lastSetUser = $("#user").val();
-                        // optionally reset form
-                        form.reset();
-                        // reset description textarea count
-                        setDescriptionCounter("");
+                        if (caller === "editTask") {
+                            // close modal
+                            modal.classList.add('hidden');
 
-                        // Set lastSetUser
-                        $("#user").val(lastSetUser);
+                        } else {
+                            // persist user across add task
+                            const lastSetUser = $("#user").val();
+                            // optionally reset form
+                            form.reset();
+                            // reset description textarea count
+                            setDescriptionCounter("");
 
-                        // reload table if using DataTables
-                        if (typeof table !== 'undefined') {
-                            table.ajax.reload(null, false);
+                            // Set lastSetUser
+                            $("#user").val(lastSetUser);
                         }
+                        // reload whole table view
+                        reloadView();
+
                     } else {
                         alert("Failed to add task: " + (data.message || 'Unknown error'));
                     }

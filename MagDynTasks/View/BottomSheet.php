@@ -265,7 +265,7 @@
             let debounceTimer;
             $("#applyFilter").on("click", function () {
                 clearTimeout(debounceTimer);
-                debounceTimer = setTimeout(() => table.ajax.reload(), 500);
+                debounceTimer = setTimeout(() => TableReload(), 500);
                 isFilterApplied = true;
                 $('#loader').toggleClass('hidden');
                 $('#loaderText').text("Applying Filter")

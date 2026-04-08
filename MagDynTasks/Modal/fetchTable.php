@@ -1,17 +1,19 @@
 <?php
 require '../../config.php';
 require "../utils/dbscripts.php";
+require "helper.php";
 session_start();
 header('Content-Type: application/json');
 
 $draw = isset($_GET['draw']) ? $_GET["draw"] : 1;
+$start = isset($_GET["start"]) ? $_GET["start"] : 0;
+$length = isset($_GET["length"]) ? $_GET["length"] : 50;
 $loggedInUserId = $_SESSION["user_id"];
 
 $isAdminFlag = $_GET["isAdmin"] ? true : false;
 
 // Nested filter
 $filter = isset($_GET['filter']) ? $_GET['filter'] : [];
-$export = isset($_GET["export"]) ? $_GET["export"] : false;
 
 $title = isset($filter['title']) ? $filter['title'] : '';
 $status = isset($filter['status']) ? $filter['status'] : '';
@@ -50,6 +52,8 @@ $totalData = $result->fetch_assoc()['total'];
 $stmt->close();
 
 $query = $EVENTQUERY;
+// query for counting filtered rows
+$countQuery = $EVENTQUERYCOUNT;
 
 $params = [];
 $types = "";
@@ -67,6 +71,7 @@ if (($title || $status !== '' || $priority || $uid) && $isAdminFlag) {
     // if !$isAdminFlag then always has a WHERE clause due to default search
     // So Add WHERE clause in case if some filter is truthy and is Admin 
     $query .= !$isWHEREAdded ? " WHERE " : "";
+    $countQuery .= !$isWHEREAdded ? " WHERE " : "";
 
 
 }
@@ -83,7 +88,7 @@ if ($priority) {
 }
 if ($uid) {
     $placeholder = implode(",", array_fill(0, count($uidArray), "?"));
-    $appliedFilters[] = " e.uid in ({$placeholder})";
+    $appliedFilters[] = " e.department in ({$placeholder})";
     $params = array_merge($params, $uidArray);
     $types .= implode("", array_fill(0, count($uidArray), "i"));
 }
@@ -94,6 +99,7 @@ if ($status !== '') {
 }
 
 $query .= implode(" AND ", $appliedFilters);
+$countQuery .= implode(" AND ", $appliedFilters);
 
 
 
@@ -108,6 +114,10 @@ if ($sortByDate) {
 }
 
 
+
+$query .= " LIMIT {$start} , {$length} ";
+
+
 file_put_contents(
     "debug.log",
     print_r($_POST, true) . "\n" .
@@ -115,7 +125,13 @@ file_put_contents(
     print_r($params, true) . PHP_EOL,
     FILE_APPEND
 );
-;
+
+file_put_contents(
+    "debug.log",
+    print_r($countQuery, true) . PHP_EOL,
+    FILE_APPEND
+);
+
 $stmt = $con->prepare($query);
 if (count($params) > 0)
     $stmt->bind_param($types, ...$params);
@@ -124,70 +140,25 @@ if (count($params) > 0)
 
 $stmt->execute();
 $result = $stmt->get_result();
-$data = [];
+$filteredData = [];
+
+// Get Records Count
+$countStmt = $con->prepare($countQuery);
+if (count($params) > 0)
+    $countStmt->bind_param($types, ...$params);
+$countStmt->execute();
+$countResult = $countStmt->get_result();
+$filteredCount = $countResult->fetch_assoc()['TOTAL'];
+
 
 while ($row = $result->fetch_assoc()) {
-
-    $id = $row['id'];
-    $cron = htmlspecialchars($row["cron"]);
-    $task = htmlspecialchars($row['description']);
-    $status = $row['status'];
-    $name = isset($row['user_name']) ? $row['user_name'] : 'Unknown';
-    $title = $row["title"];
-    $description = $row["description"];
-    $userId = $row["user_account_id"];
-    $date = date("d-m-y", strtotime($row['time']));
-    $assginee = $row['assignee'];
-    // 🕒 Format time
-    $time = date("d M, g:i A", strtotime($row['time']));
-    ;
-    $priority = $row['priority_id'];
-    $department = $row["department"];
-    // 🎨 Status color
-    $statusColor = $status === 'finished'
-        ? 'bg-green-400/10 text-green-600 inset-ring-green-500/20'
-        : 'bg-yellow-400/10 text-yellow-600 inset-ring-yellow-400/20';
-
-    $truncatedDescription = strlen($description) > 100 ? substr($description, 0, 100) . "..." : $description;
-    // ✂ Preview
-    $preview = strlen($task) > 60
-        ? substr($task, 0, 60) . '...'
-        : $task;
-    $borderColor = $status !== 'pending' ? 'border-l-green-400' : 'border-l-yellow-400';
-    // 🧱 HTML (Inbox UI)
-
-    ob_start();
-    include '../Templates/rowItem.php';
-    $html = ob_get_clean();
-
-    $data[] = [
-        $id,
-        $description,
-        $status,
-        $title,
-        $priority,
-        $userId,
-        $cron,
-        $department,
-        $html,
-        $date,
-        $assginee,
-        $name
-
-    ];
+    $filteredData[] = parseRow($row);
 }
 
-if ($export) {
-    // CSV export, no need for draw
-    echo json_encode([
-        "data" => $data
-    ]);
-} else {
-    // ListView RESPONSE
-    echo json_encode([
-        "draw" => intval($draw),
-        "recordsTotal" => intval($totalData),
-        "recordsFiltered" => intval($totalData),
-        "data" => $data
-    ]);
-}
+
+
+echo json_encode([
+    "recordsTotal" => intval($totalData),
+    "recordsFiltered" => $filteredCount,
+    "data" => $filteredData
+]);

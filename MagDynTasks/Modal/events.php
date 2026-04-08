@@ -1,6 +1,9 @@
 <?php
 session_start();
 require '../../config.php';
+require 'helper.php';
+require "../utils/dbscripts.php";
+
 $action = isset($_POST['action']) ? $_POST['action'] : '';
 switch ($action) {
     case "delete": {
@@ -12,22 +15,14 @@ switch ($action) {
         echo json_encode(["status" => "success"]);
         break;
     }
-    case "markFinished": {
+    case "finished": {
         $id = $_POST['id'];
-        $stmt = $con->prepare("UPDATE events SET done=1 WHERE id=?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-
-        echo json_encode(["status" => "success"]);
+        updateStatus($id, 1);
         break;
     }
-    case "markPending": {
+    case "pending": {
         $id = $_POST['id'];
-        $stmt = $con->prepare("UPDATE events SET done=0 WHERE id=?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-
-        echo json_encode(["status" => "success"]);
+        updateStatus($id, 0);
         break;
     }
     case "addTask": {
@@ -82,7 +77,53 @@ switch ($action) {
             $id // Id(int)
         );
         $stmt->execute();
-        echo json_encode(["status" => true, "isEdit" => true]);
+        if ($stmt->affected_rows > 0) {
+            $row = fetchRecord($id);
+            echo json_encode(["status" => true, "isEdit" => true, "data" => parseRow($row)]);
+
+        } else {
+            echo json_encode([
+                "status" => "error",
+                "message" => "No row updated (invalid ID or already updated)"
+            ]);
+        }
         break;
+    }
+}
+
+function fetchRecord($recordId)
+{
+    global $con, $EVENTQUERY;
+
+    // ✅ Fetch updated row
+    $stmt2 = $con->prepare($EVENTQUERY . " WHERE e.id = ?;");
+    $stmt2->bind_param("i", $recordId);
+    $stmt2->execute();
+
+    $result = $stmt2->get_result();
+    $row = $result->fetch_assoc();
+    return $row;
+}
+
+function updateStatus($id, $status)
+{
+    global $con;
+    $stmt = $con->prepare("UPDATE events SET done=? WHERE id=?");
+    $params = [$status, $id];
+    $stmt->bind_param("ii", ...$params);
+    $stmt->execute();
+
+    if ($stmt->affected_rows > 0) {
+        $row = fetchRecord($id);
+
+        echo json_encode([
+            "status" => "success",
+            "data" => parseRow($row)
+        ]);
+    } else {
+        echo json_encode([
+            "status" => "error",
+            "message" => "No row updated (invalid ID or already updated)"
+        ]);
     }
 }
