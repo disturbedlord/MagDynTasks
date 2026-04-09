@@ -1,5 +1,5 @@
 <!-- Modal backdrop -->
-<div id="TaskModal" class="p-2 fixed inset-0 bg-black/80 flex items-center justify-center hidden z-50 overflow-auto">
+<div id="TaskModal" class="p-2 fixed inset-0 bg-black/80 flex items-center justify-center hidden z-40 overflow-auto">
     <!-- Modal container -->
     <div class="py-2 bg-white rounded-lg shadow-lg w-full max-w-md relative max-h-[90vh] flex flex-col">
 
@@ -29,7 +29,7 @@
                 <div>
                     <label for="description" class="block text-gray-700 font-medium mb-1">Description <span
                             class="text-red-500">*</span></label>
-                    <textarea id="description" name="description" rows="3" maxlength="250"
+                    <textarea id="description" name="description" rows="3" maxlength="251"
                         class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Enter task description" required></textarea>
 
@@ -129,7 +129,7 @@
             const enteredValue = e.target.value;
             if (typeof enteredValue === "string") {
                 const setLength = setDescriptionCounter(enteredValue);
-                if (setLength >= 250) {
+                if (setLength > 250) {
                     descriptionCounter.css("color", "#ef4646");
                     $("#submitBtn").prop("disabled", true);
                 } else {
@@ -138,8 +138,6 @@
 
                 }
             }
-
-
 
         })
 
@@ -177,6 +175,8 @@
             modal.querySelectorAll('input , textarea').forEach((element) => {
                 element.value = '';
             });
+
+            cronValidator.innerText = "";
             // set default value to select
             modal.querySelector('#user').value = '';
             modal.querySelector('#priority').value = 1;
@@ -184,10 +184,20 @@
             // incase of edit validate on modal load
 
         });
-        closeBtns.forEach(btn => btn?.addEventListener('click', () => modal.classList.add('hidden')));
+        closeBtns.forEach(btn => btn?.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            setDescriptionCounter("");
+            cronValidator.style.display = "none";
+        }));
 
         // Close when clicking outside container
-        modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+                setDescriptionCounter("");
+                cronValidator.style.display = "none";
+            }
+        });
 
         form.addEventListener('submit', (e) => {
             e.preventDefault(); // prevent page reload
@@ -238,6 +248,7 @@
                             form.reset();
                             // reset description textarea count
                             setDescriptionCounter("");
+                            cronValidator.style.display = "none";
 
                             // Set lastSetUser
                             $("#user").val(lastSetUser);

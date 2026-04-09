@@ -279,12 +279,20 @@
                 $("#filterSelectedUser").text("Select Users");
                 $("#filterSelectedUser").attr("data-selectedids", "");
                 $("#filterStatus").val("");
+                activate(sortDateBtn, sortPriorityBtn);
+                $("#sortDate").attr("data-sortDate", 0);
+
+                document.getElementById("dateSortIcon").classList = "text-2xl bi bi-sort-down-alt";
+                $("#sortPriority").attr("data-sortPriority", 0)
+
+                document.getElementById("prioritySortIcon").classList = "text-2xl bi bi-sort-numeric-down";
+
             }
 
             $("#resetFilter").on("click", function () {
                 clearFilter();
                 isFilterApplied = true;
-                table.ajax.reload();
+                reloadView();
                 checkboxes.forEach(cb => {
                     cb.checked = false;
                 });

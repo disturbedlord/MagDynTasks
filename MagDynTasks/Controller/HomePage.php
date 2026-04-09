@@ -95,6 +95,8 @@ while ($row = $allUsersResult->fetch_assoc()) {
                     </svg>
                     <div class="text-sm">Loading more data</div>
                 </div>
+
+
             </div>
 
         </div>

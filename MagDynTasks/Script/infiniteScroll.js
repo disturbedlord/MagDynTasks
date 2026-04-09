@@ -51,6 +51,18 @@ const nextPageToFetch = () => {
   return next;
 };
 
+const NoResult = () => {
+  return `<div>
+      <p class='text-sm'>No Result</p>
+    </div>`;
+};
+
+const EndOfList = () => {
+  return `<tr><td><div id="endOfList" class="p-1 text-xs text-gray-500 text-center">
+                    <p>— You've reached the end —</p>
+                </div></td></tr>`;
+};
+
 // ── Fetch ─────────────────────────────────────────────────────────────────────
 
 async function fetchPage(pageIndex) {
@@ -152,6 +164,11 @@ async function loadNextPage(direction, options = {}) {
         document.body.removeChild(measureContainer);
 
         bottomSpacerHeight -= realAddedHeight;
+      }
+
+      if (pageToFetch + 1 >= totalPages) {
+        //   Last Page
+        newRows.push(EndOfList());
       }
       // Insert before bottom spacer sentinel (last slot)
       allRows.splice(allRows.length - 1, 0, ...newRows);
@@ -269,6 +286,12 @@ async function loadNextPage(direction, options = {}) {
       reloadTable();
       break;
     }
+  }
+
+  if (allRows.length === 2) {
+    //   No Records, only top and bottom spacer
+    allRows.splice(1, 0, NoResult());
+    Repaint();
   }
 
   attachRowCallback();

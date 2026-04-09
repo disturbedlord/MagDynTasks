@@ -65,11 +65,11 @@
                 </div>
             </div>
 
-            <div class="w-[20%] bg-gray-100 rounded-md m-2 flex justify-center items-center">
-                <button name="editBtn" class="ml-3">
+            <button name="editBtn" class="w-[20%] bg-gray-100 rounded-md m-2 flex justify-center items-center">
+                <div class="ml-3">
                     <i class="fa-regular fa-pen-to-square text-gray-600 text-2xl"></i>
-                </button>
-            </div>
+                </div>
+            </button>
         </div>
 
 

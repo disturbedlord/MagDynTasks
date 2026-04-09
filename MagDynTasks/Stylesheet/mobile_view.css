@@ -2,15 +2,20 @@ html,
 body {
   overflow-x: hidden;
   max-width: 100%;
-  overscroll-behavior-x: none;
 }
 
 * {
   box-sizing: border-box;
 }
-html,
-body {
-  overscroll-behavior: none;
+
+tr > td {
+  border: none;
+}
+
+input,
+textarea,
+select {
+  font-size: 16px;
 }
 
 #top-spacer-row {
@@ -30,7 +35,7 @@ body {
 }
 
 .swipe-yellow {
-  background-color: #d5b918 !important;
+  background-color: #facc15 !important;
 }
 
 .swipe-row {
@@ -162,5 +167,5 @@ div.dt-container.dt-empty-footer .dt-scroll-body {
   background: #11b049;
 }
 .item-list .item .action-pending::before {
-  background: #d5b918;
+  background: #facc15;
 }

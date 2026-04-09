@@ -261,7 +261,7 @@ document
     const descCounter = document.getElementById("descriptionLengthCounter");
     descCounter.innerText = `${description.value.length} / 250`;
 
-    if (description.value.length >= 250) {
+    if (description.value.length > 250) {
       descCounter.style = " color : #EF4646; ";
       $("#submitBtn").prop("disabled", true);
     } else {
@@ -359,7 +359,7 @@ function showToast(message, type = "success") {
   const toast = document.createElement("div");
   toast.className = `
         flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg text-white text-sm
-        transform transition-all duration-300 opacity-0 translate-y-2
+        transform transition-all duration-300 opacity-0 translate-y-2 z-50
         ${styles[type].bg}
     `;
 

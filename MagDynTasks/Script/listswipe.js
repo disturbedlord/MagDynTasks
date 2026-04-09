@@ -160,6 +160,8 @@ const DeleteRow = async (row) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
+          const rowIndex = $(row).prevAll("tr").length - 1;
+
           if (RemoveSpecificRow(rowIndex)) {
             showToast("Task deleted successfully!", "success");
           }
