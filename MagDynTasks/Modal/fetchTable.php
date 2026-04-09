@@ -9,6 +9,7 @@ $draw = isset($_GET['draw']) ? $_GET["draw"] : 1;
 $start = isset($_GET["start"]) ? $_GET["start"] : 0;
 $length = isset($_GET["length"]) ? $_GET["length"] : 50;
 $loggedInUserId = $_SESSION["user_id"];
+$export = isset($_GET["export"]) ? $_GET["export"] : false;
 
 $isAdminFlag = $_GET["isAdmin"] ? true : false;
 
@@ -60,7 +61,7 @@ $types = "";
 $isWHEREAdded = false;
 
 if (!$isAdminFlag) {
-    $appliedFilters[] = " WHERE e.uid = ?";
+    $appliedFilters[] = " WHERE e.department = ?";
     $params[] = $loggedInUserId;
     $types .= "i";
     $isWHEREAdded = true;
@@ -114,8 +115,8 @@ if ($sortByDate) {
 }
 
 
-
-$query .= " LIMIT {$start} , {$length} ";
+if (!$export)
+    $query .= " LIMIT {$start} , {$length} ";
 
 
 file_put_contents(

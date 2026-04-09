@@ -3,7 +3,7 @@
 
 <!-- SIDEBAR -->
 <div id="sidebar"
-    class="fixed top-0 left-0 h-svh w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50 flex flex-col">
+    class="fixed top-0 left-0 h-dvh w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50 flex flex-col">
 
     <!-- Header -->
     <div class="p-4 border-b flex justify-between items-start">
@@ -39,3 +39,30 @@
     </div>
 
 </div>
+
+<script>
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+            const btn = document.getElementById("logoutBtn");
+            // Handle Logout Click
+            if (btn) {
+                btn.addEventListener("click", () => {
+                    fetch("../Modal/auth.php", {
+                        method: "POST",
+                        credentials: "same-origin",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: `action=logout`,
+                    }).then(() => {
+                        // Destroy Filter State
+                        window?.xoid?.destroyState();
+                        window.location.href = "login.php";
+                    });
+                });
+            }
+        },
+        false,
+    );
+</script>

@@ -1,5 +1,17 @@
 <head>
-    <?php require "../Common/header.php" ?>
+    <?php require "../Common/header.php";
+
+    $reason = isset($_GET['reason']) ? $_GET['reason'] : '';
+
+    session_start();
+
+    if (isset($_SESSION['user_id'])) {
+        header("Location: HomePage.php");
+        exit;
+    }
+
+    ?>
+    <script src="../Script/root.js"></script>
 </head>
 <div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
 
@@ -48,6 +60,8 @@
         </form>
 
     </div>
+    <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-2"></div>
+
 </div>
 
 <script>
@@ -121,4 +135,13 @@
                 btn.disabled = false;
             });
     });
+
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("reason") === "timeout") {
+        showToast("Session expired. Please login again.", "info");
+
+        // remove query param (clean URL)
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
 </script>

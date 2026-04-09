@@ -9,7 +9,8 @@ function parseRow($row)
     $name = isset($row['user_name']) ? $row['user_name'] : 'Unknown';
     $title = $row["title"];
     $description = $row["description"];
-    $userId = $row["user_account_id"];
+    $creatorId = $row["user_account_id"];
+    $assigneeId = $row["department"];
     $date = date("d-m-y", strtotime($row['time']));
     $assginee = $row['assignee'];
     // 🕒 Format time
@@ -36,13 +37,14 @@ function parseRow($row)
         $status,
         $title,
         $priority,
-        $userId,
+        $creatorId,
         $cron,
         $department,
         $html,
         $date,
         $assginee,
-        $name
+        $name,
+        $assigneeId
     ];
 }
 

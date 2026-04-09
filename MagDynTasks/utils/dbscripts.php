@@ -16,7 +16,7 @@ SELECT
     d.user_account_id,
     e.department,
     e.cron , 
-    d2.username as assignee
+    d2.first_name as assignee
 FROM events e
 LEFT JOIN user_account d 
  ON d.user_account_id = e.uid

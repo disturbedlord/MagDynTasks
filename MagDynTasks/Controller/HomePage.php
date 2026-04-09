@@ -30,15 +30,18 @@ while ($row = $allUsersResult->fetch_assoc()) {
 
 <head>
     <?php require "../Common/header.php" ?>
-    <link rel="stylesheet" href="../Stylesheet/mobile_view.css">
-    <script>
-        window.APP = {
-            user: {
-                id: <?= (int) $_SESSION['user_id'] ?>,
-                name: <?= json_encode($_SESSION['user_name']) ?>,
-                isAdmin: <?= $_SESSION['is_admin'] ?>
-            }
-        };
+    <link rel="stylesheet" href="../Stylesheet/HomePage.css">
+
+    <script type="module">
+        import "../Script/Xoid.js";
+
+        const user = window.xoid.user;
+
+        user.setUser({
+            id: <?= (int) $_SESSION['user_id'] ?>,
+            name: <?= json_encode($_SESSION['user_name']) ?>,
+            isAdmin: <?= $_SESSION['is_admin'] ?>
+        });
     </script>
 </head>
 
@@ -50,6 +53,8 @@ while ($row = $allUsersResult->fetch_assoc()) {
             <button id="menuBtn" class="w-12 h-12 rounded-md bg-gray-200">
                 <i class="bi bi-list text-2xl"></i>
             </button>
+
+            <div id="output"></div>
 
             <div class="flex flex-row space-x-2">
                 <button id="exportCSV"
@@ -117,20 +122,27 @@ while ($row = $allUsersResult->fetch_assoc()) {
         <!-- Floating Add Task Button -->
 
     </div>
-    <?php require "../View/SideNavigation.php" ?>
 
 
-    <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-2"></div>
+
+    <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-2 w-[calc(100vw-10vw)]"></div>
+    <script type="module" src="../Script/Xoid.js"></script>
+
+    <script src="../Script/root.js"></script>
+    <script src="../Script/sessionChecker.js"></script>
     <script src="../Script/cronParser.js"></script>
     <script src="../Script/listswipe.js"></script>
     <script src="../Script/InfiniteScroll.js"></script>
     <script src="../Script/HomePage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+
     <?php require "../View/TaskModal.php";
     require "../View/BottomSheet.php";
     require "../View/ConfirmationModal.php";
     require "../Common/Loader.php";
-    ?>
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    require "../View/SideNavigation.php"
+        ?>
+
 
 </body>
 

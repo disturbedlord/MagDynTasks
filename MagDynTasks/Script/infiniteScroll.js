@@ -65,8 +65,27 @@ const EndOfList = () => {
 
 // ── Fetch ─────────────────────────────────────────────────────────────────────
 
+const getFilters = () => {
+  const Store = window.xoid;
+  if (Object.keys(Store?.filter?.value?.value).length > 0) {
+    return Store?.filter?.value?.value;
+  } else {
+    return {
+      title: $("#filterTitle").val(),
+      status: $("#filterStatus").val(),
+      priority: $("#filterPriority").val(),
+      uid: $("#filterSelectedUser").attr("data-selectedids"),
+      sortByDate: $("#sortDate").attr("data-isSelected"),
+      sortDate: $("#sortDate").attr("data-sortdate"),
+      sortByPriority: $("#sortPriority").attr("data-isSelected"),
+      sortPriority: $("#sortPriority").attr("data-sortpriority"),
+    };
+  }
+};
+
 async function fetchPage(pageIndex) {
   if (pageCache.has(pageIndex)) return pageCache.get(pageIndex);
+  const user = window?.xoid?.user?.value?.value;
 
   const res = await $.ajax({
     url: "../Modal/fetchTable.php",
@@ -88,19 +107,9 @@ async function fetchPage(pageIndex) {
     data: {
       start: pageIndex * pageSize,
       length: pageSize,
-      export: false,
-      loggedInUserId: window?.APP?.user?.id,
-      isAdmin: window?.APP?.user?.isAdmin,
-      filter: {
-        title: $("#filterTitle").val(),
-        status: $("#filterStatus").val(),
-        priority: $("#filterPriority").val(),
-        uid: $("#filterSelectedUser").attr("data-selectedids"),
-        sortByDate: $("#sortDate").attr("data-isSelected"),
-        sortDate: $("#sortDate").attr("data-sortdate"),
-        sortByPriority: $("#sortPriority").attr("data-isSelected"),
-        sortPriority: $("#sortPriority").attr("data-sortpriority"),
-      },
+      loggedInUserId: user?.id,
+      isAdmin: user?.isAdmin,
+      filter: getFilters(),
     },
   });
 
@@ -123,7 +132,9 @@ const renderRow = (row, data, pageNo) => {
   TR.attr("data-status", data[2]);
   TR.attr("data-title", data[3]);
   TR.attr("data-priority", data[4]);
-  TR.attr("data-user", data[5]);
+  TR.attr("data-creator", data[5]);
+  TR.attr("data-assignee", data[12]);
+
   TR.attr("data-cron", data[6]);
   TR.attr("data-department", data[7]);
   TR.attr("data-page", pageNo);
@@ -166,7 +177,7 @@ async function loadNextPage(direction, options = {}) {
         bottomSpacerHeight -= realAddedHeight;
       }
 
-      if (pageToFetch + 1 >= totalPages) {
+      if (pageToFetch + 1 >= Math.ceil(totalRecords / pageSize)) {
         //   Last Page
         newRows.push(EndOfList());
       }
@@ -409,8 +420,8 @@ $("#loadNext").on("click", () => loadNextPage("down"));
 $("#loadPrev").on("click", () => loadNextPage("up"));
 
 const reloadView = () => {
-  // get current page in view
-
+  $("#loader").toggleClass("hidden");
+  $("#loaderText").text("Fetching latest data");
   allRows.length = 0;
   loadNextPage("reload", { pagesToRender: [0] });
 };

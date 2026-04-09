@@ -57,22 +57,22 @@ switch ($action) {
         $id = $_POST["id"];
         $cron = $_POST["cron"];
         $priority = $_POST["priority"];
-        $user = $_POST["user"];
+        $createdBy = $_SESSION['user_id'];
+        $assignedTo = $_POST["user"];
         $title = $_POST["title"];
         $done = 0;
         $time = date("Y-m-d H:i:s"); // current timestamp
-        $department = $_POST["department"];
         $stmt = $con->prepare("Update events set uid=? , description=? , done=? , time=? , priority=? , title=? , department=?,cron=? WHERE id=?");
         // bind parameters
         $stmt->bind_param(
             "isisssssi", // types: i=int, s=string
-            $user,      // uid (int)
+            $createdBy,      // uid (int)
             $description,      // description (string)
             $done,      // done (int)
             $time,      // time (string)
             $priority,  // priority (int)
             $title,     // title (string)
-            $department,// department (string)
+            $assignedTo,// Assigned to ??
             $cron,      // cron (string)
             $id // Id(int)
         );

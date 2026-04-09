@@ -23,6 +23,7 @@
           if (e.touches.length > 1) return; // ignore multi-touch
 
           var $item = $(this);
+
           $item.stop();
 
           if (settings.closeOnOpen) {
@@ -48,6 +49,7 @@
         })
         .on("touchmove", settings.itemSelector, function (e) {
           var $item = $(this);
+
           var data = $item.data("listSwipe");
           var touch = getTouchPosition(e);
 
@@ -82,6 +84,9 @@
         })
         .on("touchend", settings.itemSelector, function (e) {
           var $item = $(this);
+
+          const canSwipe = AllowAction($item);
+
           var data = $item.data("listSwipe");
           var touch = getTouchPosition(e);
 
@@ -95,11 +100,17 @@
             Math.abs(touchDelta.xDelta) / settings.itemActionWidth;
           if (xThreshold >= settings.snapThreshold) {
             if (touchDelta.xDelta < 0) {
-              // Swipe Right
-              DeleteRow($item[0]);
+              if (!canSwipe) {
+                showToast("Cannot perform this action", "error");
+              } else
+                // Swipe Right
+                DeleteRow($item[0]);
             } else {
-              // Swipe left
-              UpdateRowStatus($item[0]);
+              if (!canSwipe) {
+                showToast("Cannot perform this action", "error");
+              } else
+                // Swipe left
+                UpdateRowStatus($item[0]);
             }
           }
           touchDelta.xDelta = 0;
@@ -204,9 +215,10 @@ const UpdateRowStatus = async (row) => {
           if (UpdateSpecificRow(pageNo, rowIndex, data.data)) {
             showToast(
               "Task marked " +
-                (nextRowActivity === "markFinished" ? "finished!" : "pending!"),
+                (nextRowActivity === "finished" ? "finished!" : "pending!"),
               "success",
             );
+            //   reloadView();
           }
         } else {
           showToast(data.message || "Task couldn't be updated", "error");
@@ -220,4 +232,11 @@ const UpdateRowStatus = async (row) => {
     // ❌ NO clicked
     console.log("User cancelled");
   }
+};
+
+const AllowAction = (row) => {
+  if (window?.xoid?.user?.value?.value?.isAdmin === 1) return true;
+
+  const assignedTo = $(row).data("creator");
+  return assignedTo === window?.xoid?.user?.value?.value?.id ? true : false;
 };

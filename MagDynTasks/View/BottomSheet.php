@@ -85,7 +85,7 @@
                                                 <li>
                                                     <label
                                                         class="flex items-center gap-2 px-2 py-1 hover:bg-gray-100 rounded cursor-pointer">
-                                                        <input type="checkbox"
+                                                        <input type="checkbox" data-type="userSelection"
                                                             class="user-checkbox w-4 h-4 border-2 border-gray-600 rounded-sm bg-white checked:bg-gray-800 checked:border-gray-800 focus:ring-0"
                                                             value="<?= $row['uid'] ?>" data-name="<?= $row['first_name'] ?>">
                                                         <span>
@@ -147,24 +147,32 @@
 
 <script>
 
+    const sortDateBtn = document.getElementById("sortDate");
+    const sortPriorityBtn = document.getElementById("sortPriority");
+    const checkboxes = document.querySelectorAll('.user-checkbox');
+    const selectedText = document.getElementById('filterSelectedUser');
+
+    let StoreFilter;
+
+    // Active Sortable Btns
+    function activate(btnActive, btnInactive) {
+        // Active button
+        btnActive.classList.remove("opacity-50", "cursor-not-allowed");
+        btnActive.classList.add("bg-gray-300");
+        btnActive.setAttribute("data-isSelected", "1");
+        // Inactive button
+        btnInactive.classList.add("opacity-50", "cursor-not-allowed");
+        btnInactive.classList.remove("bg-gray-300");
+        btnInactive.setAttribute("data-isSelected", "0");
+    }
 
     document.addEventListener(
         "DOMContentLoaded",
         function () {
+            // State Management Filter from Global Store
+            StoreFilter = window.xoid?.filter;
+            // Reload Filter state from Global State
 
-            const sortDateBtn = document.getElementById("sortDate");
-            const sortPriorityBtn = document.getElementById("sortPriority");
-
-            function activate(btnActive, btnInactive) {
-                // Active button
-                btnActive.classList.remove("opacity-50", "cursor-not-allowed");
-                btnActive.classList.add("bg-gray-300");
-                btnActive.setAttribute("data-isSelected", "1");
-                // Inactive button
-                btnInactive.classList.add("opacity-50", "cursor-not-allowed");
-                btnInactive.classList.remove("bg-gray-300");
-                btnInactive.setAttribute("data-isSelected", "0");
-            }
 
             // keep Date as Default Sorting
             activate(sortDateBtn, sortPriorityBtn);
@@ -199,6 +207,8 @@
                 modal.classList.remove('translate-y-full');
                 overlay.classList.remove('hidden');
                 document.body.classList.add('overflow-hidden');
+                SetFilter(clearFilter = false);
+
             });
 
             window.closeFilter = function () {
@@ -212,50 +222,30 @@
 
             const dropdownBtn = document.getElementById('dropdown-button');
             const dropdownMenu = document.getElementById('dropdown-menu');
-            const selectedText = document.getElementById('filterSelectedUser');
-            const checkboxes = document.querySelectorAll('.user-checkbox');
 
             // Toggle dropdown
-            dropdownBtn.addEventListener('click', () => {
+            dropdownBtn?.addEventListener('click', () => {
                 dropdownMenu.classList.toggle('hidden');
             });
 
             // Close when clicking outside
             document.addEventListener('click', (e) => {
-                if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
-                    dropdownMenu.classList.add('hidden');
+                if (!dropdownBtn?.contains(e.target) && !dropdownMenu?.contains(e.target)) {
+                    dropdownMenu?.classList.add('hidden');
                 }
             });
 
-            // Update selected text
-            function updateSelected() {
-                const selected = [...checkboxes]
-                    .filter(cb => cb.checked)
-                    .map(cb => cb.dataset.name);
 
-                const selectedIds = [...checkboxes]
-                    .filter(cb => cb.checked)
-                    .map(cb => cb.value);
-
-                if (selected.length === 0) {
-                    selectedText.innerText = "Select Users";
-                } else {
-                    selectedText.innerText = selected.join(', ');
-                }
-                let existingSelectedIds = selectedText.getAttribute("data-selectedids") ?? "";
-                existingSelectedIds = selectedIds;
-                selectedText.setAttribute("data-selectedids", existingSelectedIds);
-            }
 
             // Listen to checkbox changes
             checkboxes.forEach(cb => {
                 cb.addEventListener('change', updateSelected);
             });
 
-            document.getElementById('search-input').addEventListener('input', function () {
+            document.getElementById('search-input')?.addEventListener('input', function () {
                 const val = this.value.toLowerCase();
 
-                document.querySelectorAll('#dropdown-list li').forEach(li => {
+                document.querySelectorAll('#dropdown-list li')?.forEach(li => {
                     li.style.display = li.innerText.toLowerCase().includes(val)
                         ? ''
                         : 'none';
@@ -267,35 +257,33 @@
                 clearTimeout(debounceTimer);
                 debounceTimer = setTimeout(() => TableReload(), 500);
                 isFilterApplied = true;
+                // Save Filter in Global State
+                StoreFilter.setFilter({
+                    title: $("#filterTitle").val(),
+                    status: $("#filterStatus").val(),
+                    priority: $("#filterPriority").val(),
+                    uid: $("#filterSelectedUser").attr("data-selectedids"),
+                    sortByDate: $("#sortDate").attr("data-isSelected"),
+                    sortDate: $("#sortDate").attr("data-sortdate"),
+                    sortByPriority: $("#sortPriority").attr("data-isSelected"),
+                    sortPriority: $("#sortPriority").attr("data-sortpriority")
+                });
+
                 $('#loader').toggleClass('hidden');
                 $('#loaderText').text("Applying Filter")
             });
 
-            const clearFilter = () => {
-                $("#filterTitle").val("");
-                $("#filterDescription").val("");
-                $("#filterPriority").val("");
-                $("#filterSelectedUser").val("");
-                $("#filterSelectedUser").text("Select Users");
-                $("#filterSelectedUser").attr("data-selectedids", "");
-                $("#filterStatus").val("");
-                activate(sortDateBtn, sortPriorityBtn);
-                $("#sortDate").attr("data-sortDate", 0);
-
-                document.getElementById("dateSortIcon").classList = "text-2xl bi bi-sort-down-alt";
-                $("#sortPriority").attr("data-sortPriority", 0)
-
-                document.getElementById("prioritySortIcon").classList = "text-2xl bi bi-sort-numeric-down";
-
-            }
-
             $("#resetFilter").on("click", function () {
-                clearFilter();
+                SetFilter(clearFilter = true);
                 isFilterApplied = true;
-                reloadView();
                 checkboxes.forEach(cb => {
                     cb.checked = false;
                 });
+                // Clear Global State
+                StoreFilter.setFilter({});
+
+                reloadView();
+
             });
 
             $("#clearUserBtn").on("click", (e) => {
@@ -310,4 +298,67 @@
         },
         false,
     );
+
+    // Update selected text
+    function updateSelected() {
+        const selected = [...checkboxes]
+            .filter(cb => cb.checked)
+            .map(cb => cb.dataset.name);
+
+        const selectedIds = [...checkboxes]
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        if (selected.length === 0) {
+            selectedText.innerText = "Select Users";
+        } else {
+            selectedText.innerText = selected.join(', ');
+        }
+        let existingSelectedIds = selectedText.getAttribute("data-selectedids") ?? "";
+        existingSelectedIds = selectedIds;
+        selectedText.setAttribute("data-selectedids", existingSelectedIds);
+    }
+
+
+
+    const SetFilter = (clearFilter = false) => {
+        if (clearFilter) {
+            $("#filterTitle").val("");
+            $("#filterPriority").val("");
+            $("#filterSelectedUser").val("");
+            $("#filterSelectedUser").text("Select Users");
+            $("#filterSelectedUser").attr("data-selectedids", "");
+            $("#filterStatus").val("");
+            activate(sortDateBtn, sortPriorityBtn);
+            $("#sortDate").attr("data-sortDate", 0);
+
+            document.getElementById("dateSortIcon").classList = "text-2xl bi bi-sort-down-alt";
+            $("#sortPriority").attr("data-sortPriority", 0)
+
+            document.getElementById("prioritySortIcon").classList = "text-2xl bi bi-sort-numeric-down";
+        } else {
+            if (Object.keys(StoreFilter?.value?.value).length > 0) {
+                // Set State from global State
+                const { title, priority, uid, status, sortDate, sortByDate, sortPriority, sortByPriority } = StoreFilter?.value?.value;
+                $("#filterTitle").val(title);
+                $("#filterPriority").val(priority);
+                $("#filterStatus").val(status);
+                sortByDate === "1" ? activate(sortDateBtn, sortPriorityBtn) : activate(sortPriorityBtn, sortDateBtn);
+
+                document.getElementById("dateSortIcon").classList = sortDate === "0" ? "text-2xl bi bi-sort-down-alt" : "text-2xl bi bi-sort-up-alt"
+                $("#sortDate").attr("data-sortDate", sortDate);
+
+                document.getElementById("prioritySortIcon").classList = sortPriority === "0" ? "text-2xl bi bi-sort-numeric-down" : "text-2xl bi bi-sort-numeric-up"
+                $("#sortPriority").attr("data-sortPriority", sortPriority);
+
+                const userIdsToCheck = uid.split(",");
+
+                document.querySelectorAll("input[data-type='userSelection']").forEach(cb => {
+                    cb.checked = userIdsToCheck.includes(cb.value);
+                });
+
+                updateSelected();
+            }
+        }
+    }
 </script>

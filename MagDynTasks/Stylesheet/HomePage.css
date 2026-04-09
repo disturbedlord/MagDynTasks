@@ -51,7 +51,7 @@ select {
   /* green-200 */
 }
 .swipe-red {
-  background-color: #c10909 !important;
+  background-color: #dc2626 !important;
   /* red-200 */
 }
 
@@ -109,6 +109,10 @@ div.dt-container.dt-empty-footer .dt-scroll-body {
   overflow: hidden;
 }
 
+.item {
+  touch-action: pan-y; /* allow vertical scroll only */
+}
+
 .item-list .item {
   position: relative;
   display: table;
@@ -160,7 +164,7 @@ div.dt-container.dt-empty-footer .dt-scroll-body {
 }
 
 .item-list .item .action-right::before {
-  background: #c10909;
+  background: #dc2626;
 }
 
 .item-list .item .action-finished::before {

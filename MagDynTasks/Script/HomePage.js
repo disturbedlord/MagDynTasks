@@ -1,81 +1,6 @@
 // flag to check if filter is applied
 let isFilterApplied = false;
 
-// let table = $("#mobile_view_table").DataTable({
-//   serverSide: false,
-//   paging: false, // 👈 let server return all rows at once
-//   searching: false,
-//   ordering: false,
-//   info: false,
-//   // 👇 Remove scroller entirely, use plain CSS scroll
-//   scrollY: "calc(100vh - 64px)",
-//   scrollCollapse: true,
-//   processing: true,
-//   scroller: false,
-
-//   pageLength: 20,
-//   paging: false,
-
-//   layout: {
-//     topStart: null,
-//     topEnd: null,
-//     bottomStart: null,
-//     bottomEnd: null,
-//   },
-
-//   columns: [
-//     { data: 0 },
-//     { data: 1 },
-//     { data: 2 },
-//     { data: 3 },
-//     { data: 4 },
-//     { data: 5 },
-//     { data: 6 },
-//     { data: 7 },
-//     { data: 8 },
-//   ],
-
-//   columnDefs: [
-//     { targets: 0, visible: false },
-//     { targets: 1, visible: false },
-//     { targets: 2, visible: false },
-//     { targets: 3, visible: false },
-//     { targets: 4, visible: false },
-//     { targets: 5, visible: false },
-//     { targets: 6, visible: false },
-//     { targets: 7, visible: false },
-//     { targets: 8, className: "p-0" },
-//   ],
-
-//   createdRow: function (row, data) {
-//     $(row).addClass("swipe-row border-b border-gray-300 bg-[#1c1f24]");
-//     $(row).attr("data-id", data[0]);
-//     $(row).attr("data-description", data[1]);
-//     $(row).attr("data-status", data[2]);
-//     $(row).attr("data-title", data[3]);
-//     $(row).attr("data-priority", data[4]);
-//     $(row).attr("data-user", data[5]);
-//     $(row).attr("data-cron", data[6]);
-//     $(row).attr("data-department", data[7]);
-//     // we'll inject pageIndex dynamically
-//     if (data._page !== undefined) {
-//       $(row).attr("data-page", data._page);
-//     }
-//   },
-
-//   // 👇 Clean drawCallback — no height manipulation
-//   drawCallback: function () {
-//     cronParser();
-//     attachSwipe();
-//     const modal = document.getElementById("filterModal");
-//     const overlay = document.getElementById("filterOverlay");
-
-//     modal.classList.add("translate-y-full");
-//     overlay.classList.add("hidden");
-//     document.body.classList.remove("overflow-hidden");
-//   },
-// });
-
 $("#back_button").click(() => {
   window.open("./inventory_task.php", "_self");
 });
@@ -92,138 +17,6 @@ const reloadTable = (isFilterReload) => {
   scrollToTop();
 };
 
-function attachSwipe() {
-  document.querySelectorAll(".swipe-row").forEach((row, rowIndex) => {
-    // read status from dataset
-    const isDone = row.dataset.status === "finished";
-    const rowCard = row.querySelector("div");
-
-    let startX = 0;
-    let currentX = 0;
-    let threshold = 100;
-
-    row.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-      row.style.transition = "";
-    });
-
-    row.addEventListener("touchmove", (e) => {
-      currentX = e.touches[0].clientX - startX;
-
-      const activationThreshold = 20; // 👈 small dead zone
-
-      // 👇 ignore tiny movements
-      if (Math.abs(currentX) < activationThreshold) {
-        return;
-      }
-
-      row.style.transform = `translateX(${currentX}px)`;
-      if (currentX > 0) {
-        if (!isDone) {
-          rowCard.classList.add("swipe-green");
-          rowCard.classList.remove("swipe-red");
-          row.setAttribute("data-swipeActivity", "markFinished");
-        } else {
-          rowCard.classList.add("swipe-yellow");
-          rowCard.classList.remove("swipe-red");
-          rowCard.classList.remove("swipe-green");
-          row.setAttribute("data-swipeActivity", "markPending");
-        }
-      } else {
-        rowCard.classList.add("swipe-red");
-        rowCard.classList.remove("swipe-green");
-        row.setAttribute("data-swipeActivity", "delete");
-      }
-    });
-
-    row.addEventListener("touchend", async () => {
-      rowCard.classList.remove("swipe-green");
-      rowCard.classList.remove("swipe-yellow");
-      rowCard.classList.remove("swipe-red");
-
-      let task = row.dataset.title;
-      const rowActivity = row.getAttribute("data-swipeActivity");
-
-      if (currentX < -threshold) {
-        const confirmed = await showConfirm({
-          title: "Delete Task",
-          message: `Delete task "${task}" ?`,
-        });
-        if (confirmed) {
-          $("#loader").toggleClass("hidden");
-          $("#loaderText").text("Deleting Record");
-          fetch("../Modal/events.php", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: `action=${rowActivity}&id=${row.dataset.id}`,
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.status === "success") {
-                const pageNo = parseInt(row.getAttribute("data-page"));
-
-                if (RemoveSpecificRow(pageNo, rowIndex)) {
-                  showToast("Task deleted successfully!", "success");
-                }
-              } else {
-                showToast(data.message || "Delete failed", "error");
-              }
-              $("#loader").toggleClass("hidden");
-            });
-        } else {
-          // ❌ NO clicked
-          console.log("User cancelled");
-        }
-      } else if (currentX > threshold) {
-        const confirmed = await showConfirm({
-          title: `Mark ${rowActivity === "markFinished" ? "Finished" : "Pending"}`,
-          message: `Mark "${task}" as ${rowActivity === "markFinished" ? "finished" : "pending"}?`,
-        });
-        if (confirmed) {
-          $("#loader").toggleClass("hidden");
-          $("#loaderText").text("Updating Record");
-          fetch("../Modal/events.php", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: `action=${rowActivity}&id=${row.dataset.id}`,
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.status === "success") {
-                const pageNo = parseInt(row.getAttribute("data-page"));
-
-                if (UpdateSpecificRow(pageNo, rowIndex, data.data)) {
-                  showToast(
-                    "Task marked " +
-                      (rowActivity === "markFinished"
-                        ? "finished!"
-                        : "pending!"),
-                    "success",
-                  );
-                }
-              } else {
-                showToast(data.message || "Task couldn't be updated", "error");
-              }
-              $("#loader").toggleClass("hidden");
-            })
-            .catch((err) => {
-              console.error("API Call Error : ", err);
-            });
-        } else {
-          // ❌ NO clicked
-          console.log("User cancelled");
-        }
-      }
-
-      row.style.transform = "translateX(0)";
-    });
-  });
-}
-
 function escHandler(e) {
   if (e.key === "Escape") cleanup(false);
 }
@@ -238,53 +31,12 @@ document
     const row = btn.closest("tr");
     if (!row) return;
 
-    const rowIndex = $(row).prevAll("tr").length - 1;
-    const pageNo = $(row).data("page");
-
-    const modal = document.getElementById("TaskModal");
-    modal.dataset.mode = "editTask";
-    modal.dataset.id = row.dataset.id;
-    modal.dataset.pageNo = pageNo;
-    modal.dataset.rowIndex = rowIndex;
-
-    modal.classList.remove("hidden");
-
-    // prefill
-    document.getElementById("description").value =
-      row.dataset.description || "";
-    document.getElementById("title").value = row.dataset.title || "";
-    document.getElementById("priority").value = row.dataset.priority || "1";
-    document.getElementById("user").value = row.dataset.user || "";
-    document.getElementById("cron").value = row.dataset.cron || "";
-    const description = document.getElementById("description");
-
-    const descCounter = document.getElementById("descriptionLengthCounter");
-    descCounter.innerText = `${description.value.length} / 250`;
-
-    if (description.value.length > 250) {
-      descCounter.style = " color : #EF4646; ";
-      $("#submitBtn").prop("disabled", true);
-    } else {
-      descCounter.style = " color : black";
-      $("#submitBtn").prop("disabled", false);
+    if (!AllowAction(row)) {
+      showToast("Cannot perform this action", "error");
+      return;
     }
 
-    // hidden id for editing
-    if (!document.getElementById("taskId")) {
-      const hidden = document.createElement("input");
-      hidden.type = "hidden";
-      hidden.id = "taskId";
-      hidden.name = "id";
-      modal.querySelector("form").appendChild(hidden);
-    }
-    document.getElementById("taskId").value = row.dataset.id;
-    const cronField = document.getElementById("cron");
-    const cronValidator = document.getElementById("cronValidator");
-    if (cronField.value !== "") {
-      cronValidator.style.display = "block";
-      cronValidator.innerText =
-        cronField.value !== "" ? cronToShortText(cronField.value) : "";
-    }
+    PopulateTasks(row);
   });
 
 document.addEventListener(
@@ -310,103 +62,25 @@ document.addEventListener(
     menuBtn.addEventListener("click", openMenu);
     closeBtn.addEventListener("click", closeMenu);
     overlay.addEventListener("click", closeMenu);
-
-    const btn = document.getElementById("logoutBtn");
-
-    if (btn) {
-      btn.addEventListener("click", () => {
-        fetch("../Modal/auth.php", {
-          method: "POST",
-          credentials: "same-origin",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: `action=logout`,
-        }).then(() => {
-          window.location.href = "login.php";
-        });
-      });
-    }
   },
   false,
 );
-
-function showToast(message, type = "success") {
-  const container = document.getElementById("toast-container");
-
-  const styles = {
-    success: {
-      bg: "bg-green-600",
-      icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                     <path d="M5 13l4 4L19 7"/>
-                   </svg>`,
-    },
-    error: {
-      bg: "bg-red-600",
-      icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                     <path d="M6 18L18 6M6 6l12 12"/>
-                   </svg>`,
-    },
-    info: {
-      bg: "bg-blue-600",
-      icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                     <circle cx="12" cy="12" r="10"/>
-                     <path d="M12 16v-4M12 8h.01"/>
-                   </svg>`,
-    },
-  };
-
-  const toast = document.createElement("div");
-  toast.className = `
-        flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg text-white text-sm
-        transform transition-all duration-300 opacity-0 translate-y-2 z-50
-        ${styles[type].bg}
-    `;
-
-  toast.innerHTML = `
-        <div>${styles[type].icon}</div>
-        <span class="flex-1">${message}</span>
-        <button class="text-white/80 hover:text-white text-lg leading-none">&times;</button>
-    `;
-
-  // close button
-  toast.querySelector("button").onclick = () => toast.remove();
-
-  container.appendChild(toast);
-
-  // animate in
-  setTimeout(() => {
-    toast.classList.remove("opacity-0", "translate-y-2");
-  }, 10);
-
-  // auto remove
-  setTimeout(() => {
-    toast.classList.add("opacity-0", "translate-y-2");
-    setTimeout(() => toast.remove(), 300);
-  }, 3000);
-}
 
 $("#exportCSV").click(async () => {
   // Build payload
   $("#loader").toggleClass("hidden");
   $("#loaderText").text("Exporting Data");
 
+  const user = window?.xoid?.user?.value?.value;
+
   $.ajax({
     url: "../Modal/fetchTable.php",
     type: "GET",
     data: {
-      loggedInUserId: window?.APP?.user?.id,
-      isAdmin: window?.APP?.user?.isAdmin,
-      filter: {
-        title: $("#filterTitle").val(),
-        status: $("#filterStatus").val(),
-        priority: $("#filterPriority").val(),
-        uid: $("#filterSelectedUser").attr("data-selectedids"),
-        sortByDate: $("#sortDate").attr("data-isSelected"),
-        sortDate: $("#sortDate").attr("data-sortdate"),
-        sortByPriority: $("#sortPriority").attr("data-isSelected"),
-        sortPriority: $("#sortPriority").attr("data-sortpriority"),
-      },
+      loggedInUserId: user?.id,
+      isAdmin: user?.isAdmin,
+      export: true,
+      filter: getFilters(),
     },
     success: function (response) {
       $("#loader").toggleClass("hidden");
@@ -474,21 +148,3 @@ $("#exportCSV").click(async () => {
     },
   });
 });
-
-const toast = document.getElementById("toast");
-const toastText = document.getElementById("toastText");
-
-function showToast1(message = "Loading...") {
-  toastText.textContent = message;
-
-  // move into view
-  toast.classList.remove("bottom-[-100px]");
-  toast.classList.add("bottom-6");
-  toast.classList.add("text-sm");
-}
-
-function hideToast1() {
-  // slide out
-  toast.classList.remove("bottom-6");
-  toast.classList.add("bottom-[-100px]");
-}

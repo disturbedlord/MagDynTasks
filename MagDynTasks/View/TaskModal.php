@@ -88,7 +88,7 @@
                     <?php else: ?>
                         <select id="user" name="user"
                             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option selected disabled value="<?= $user_id ?>"><?= $user_name ?></option>
+                            <option value="<?= $user_id ?>"><?= $user_name ?></option>
                         </select>
                     <?php endif; ?>
 
@@ -175,13 +175,17 @@
             modal.querySelectorAll('input , textarea').forEach((element) => {
                 element.value = '';
             });
-
+            descriptionCounter.css("color", "black");
             cronValidator.innerText = "";
             // set default value to select
             modal.querySelector('#user').value = '';
             modal.querySelector('#priority').value = 1;
 
-            // incase of edit validate on modal load
+            // In case of non admin user set the non-admin user set by default
+            const user = window?.xoid?.user?.value?.value;
+            if (!user?.isAdmin) {
+                $("#user").val(user?.id)
+            }
 
         });
         closeBtns.forEach(btn => btn?.addEventListener('click', () => {
@@ -266,4 +270,54 @@
                 });
         });
     });
+
+    const PopulateTasks = (row) => {
+        const rowIndex = $(row).prevAll("tr").length - 1;
+        const pageNo = $(row).data("page");
+
+        const modal = document.getElementById("TaskModal");
+        modal.dataset.mode = "editTask";
+        modal.dataset.id = row.dataset.id;
+        modal.dataset.pageNo = pageNo;
+        modal.dataset.rowIndex = rowIndex;
+
+        modal.classList.remove("hidden");
+
+        // prefill
+        document.getElementById("description").value =
+            row.dataset.description || "";
+        document.getElementById("title").value = row.dataset.title || "";
+        document.getElementById("priority").value = row.dataset.priority || "1";
+        document.getElementById("user").value = row.dataset.assignee || "";
+        document.getElementById("cron").value = row.dataset.cron || "";
+        const description = document.getElementById("description");
+
+        const descCounter = document.getElementById("descriptionLengthCounter");
+        descCounter.innerText = `${description.value.length} / 250`;
+
+        if (description.value.length > 250) {
+            descCounter.style = " color : #EF4646; ";
+            $("#submitBtn").prop("disabled", true);
+        } else {
+            descCounter.style = " color : black";
+            $("#submitBtn").prop("disabled", false);
+        }
+
+        // hidden id for editing
+        if (!document.getElementById("taskId")) {
+            const hidden = document.createElement("input");
+            hidden.type = "hidden";
+            hidden.id = "taskId";
+            hidden.name = "id";
+            modal.querySelector("form").appendChild(hidden);
+        }
+        document.getElementById("taskId").value = row.dataset.id;
+        const cronField = document.getElementById("cron");
+        const cronValidator = document.getElementById("cronValidator");
+        if (cronField.value !== "") {
+            cronValidator.style.display = "block";
+            cronValidator.innerText =
+                cronField.value !== "" ? cronToShortText(cronField.value) : "";
+        }
+    }
 </script>

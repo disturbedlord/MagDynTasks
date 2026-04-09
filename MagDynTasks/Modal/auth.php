@@ -2,6 +2,7 @@
 
 require '../../config.php';
 
+
 header('Content-Type: application/json');
 
 $action = $_POST['action'] == "" ? "" : $_POST["action"];
@@ -36,6 +37,7 @@ switch ($action) {
             $_SESSION['user_id'] = $user['user_account_id'];
             $_SESSION['user_name'] = $user['first_name'];
             $_SESSION['is_admin'] = $user['admin_flag'];
+            $_SESSION['LAST_ACTIVITY'] = time();
 
             echo json_encode([
                 "status" => true
