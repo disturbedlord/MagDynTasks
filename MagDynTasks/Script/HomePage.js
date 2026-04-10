@@ -51,12 +51,14 @@ document.addEventListener(
       sidebar.classList.remove("-translate-x-full");
       overlay.classList.remove("hidden");
       document.body.classList.add("overflow-hidden");
+      sidebar.classList.add("open");
     }
 
     function closeMenu() {
       sidebar.classList.add("-translate-x-full");
       overlay.classList.add("hidden");
       document.body.classList.remove("overflow-hidden");
+      sidebar.classList.remove("open");
     }
 
     menuBtn.addEventListener("click", openMenu);

@@ -1,5 +1,7 @@
 let sessionChecker;
 
+// Checks logged in User's session every 30 mins
+// and if session invalid, logs out the user
 function startSessionCheck() {
   sessionChecker = setInterval(() => {
     fetch("../Session_Management/check_session.php")
@@ -27,6 +29,7 @@ startSessionCheck();
 let lastPing = 0;
 const PING_INTERVAL = 60 * 1000; // Ping every 1 min and update lastactivity
 
+// Updates session whenever there is any type of action performed on viewport
 function sendActivityPing() {
   const now = Date.now();
 
@@ -43,12 +46,10 @@ function sendActivityPing() {
 
 // Attach events
 ["mousemove", "click", "keydown", "scroll"].forEach((event) => {
-  console.log(event);
   window.addEventListener("mousemove", sendActivityPing);
   window.addEventListener("touchstart", sendActivityPing);
   window.addEventListener("touchmove", sendActivityPing);
 
   const scrollEl = document.getElementById("scroll-container");
-
   scrollEl.addEventListener("scroll", sendActivityPing);
 });

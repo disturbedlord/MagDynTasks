@@ -101,13 +101,13 @@
           if (xThreshold >= settings.snapThreshold) {
             if (touchDelta.xDelta < 0) {
               if (!canSwipe) {
-                showToast("Cannot perform this action", "error");
+                showToast("Permission denied", "error");
               } else
                 // Swipe Right
                 DeleteRow($item[0]);
             } else {
               if (!canSwipe) {
-                showToast("Cannot perform this action", "error");
+                showToast("Permission denied", "error");
               } else
                 // Swipe left
                 UpdateRowStatus($item[0]);
@@ -218,7 +218,7 @@ const UpdateRowStatus = async (row) => {
                 (nextRowActivity === "finished" ? "finished!" : "pending!"),
               "success",
             );
-            //   reloadView();
+            reloadView();
           }
         } else {
           showToast(data.message || "Task couldn't be updated", "error");

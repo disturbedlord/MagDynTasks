@@ -145,7 +145,7 @@ const renderRow = (row, data, pageNo) => {
 
 async function loadNextPage(direction, options = {}) {
   const scrollEl = document.getElementById("scroll-container");
-
+  // reset banner
   switch (direction) {
     // ── Scroll DOWN ───────────────────────────────────────────────────────────
     case "down": {
@@ -328,7 +328,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const scrollContainer = document.getElementById("scroll-container");
 
   scrollContainer.addEventListener("scroll", async () => {
-    if (scrollReached) return;
+    const loaderVisible = !$("#loader").hasClass("hidden");
+    if (scrollReached || loaderVisible) return;
 
     const { scrollTop, clientHeight, scrollHeight } =
       document.getElementById("scroll-container");

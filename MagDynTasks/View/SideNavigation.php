@@ -21,12 +21,13 @@
     </div>
 
     <!-- Middle (optional content/menu items) -->
-    <div class="flex-1 overflow-y-auto p-4">
+    <div id="menuBtns" class="flex-1 overflow-y-auto p-4">
         <!-- future menu items go here -->
 
-        <button type="button" onclick="window.location.href='HomePage.php'"
-            class="w-full text-black bg-neutral-primary border border-brand hover:bg-brand hover:text-white focus:ring-4 focus:ring-brand-subtle  leading-5 rounded-lg text-base px-3 py-1.5 focus:outline-none">Home
+        <button type="button" id="HomePage" onclick="window.location.href='HomePage.php'"
+            class="my-2 w-full text-black bg-neutral-primary border border-brand hover:bg-brand hover:text-white focus:ring-4 focus:ring-brand-subtle  leading-5 rounded-lg text-base px-3 py-1.5 focus:outline-none">Home
             Page</button>
+
 
     </div>
 
@@ -43,7 +44,44 @@
 <script>
     document.addEventListener(
         "DOMContentLoaded",
+
         function () {
+
+            const sidebar = document.getElementById("sidebar");
+
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === "class") {
+                        if (sidebar.classList.contains("open")) {
+                            onSidebarOpen();
+                        }
+                    }
+                });
+            });
+
+            observer.observe(sidebar, {
+                attributes: true,
+                attributeFilter: ["class"],
+            });
+
+            function onSidebarOpen() {
+                $("#menuBtns button").each((idx) => {
+                    const btn = $(this);
+                    $(btn).removeClass("text-blue-400");
+                    $(btn).addClass("text-black");
+                })
+
+                const url = window.location.href; // "http://localhost/.../HomePage.php"
+                const path = new URL(url).pathname; // "/magDynTasks/MagDynTasks/Controller/HomePage.php"
+                const controller = path.split('/').pop().replace('.php', '');
+
+                $(`#${controller}`).removeClass("text-black");
+                $(`#${controller}`).addClass("text-blue-400");
+            }
+
+
+
+
             const btn = document.getElementById("logoutBtn");
             // Handle Logout Click
             if (btn) {
