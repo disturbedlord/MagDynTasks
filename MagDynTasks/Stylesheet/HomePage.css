@@ -61,6 +61,10 @@ table tr td {
   text-align: start !important;
 }
 
+#logo {
+  font-family: verdana;
+}
+
 table tr td:nth-child(3) {
   text-align: center !important;
 }

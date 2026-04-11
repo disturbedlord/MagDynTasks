@@ -16,20 +16,20 @@
         <!-- Scrollable content -->
         <div class="px-6 py-2 overflow-auto flex-1">
             <form id="TaskForm" class="space-y-4">
-                <!-- Title -->
+                <!-- Title
                 <div>
                     <label for="title" class="block text-gray-700 font-medium mb-1">Title <span
                             class="text-red-500">*</span></label>
                     <input id="title" name="title" type="text" maxlength="250" value=""
                         class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Enter task title" required>
-                </div>
+                </div> -->
 
                 <!-- Description -->
                 <div>
-                    <label for="description" class="block text-gray-700 font-medium mb-1">Description <span
+                    <label for="description" class="block text-gray-700 font-medium mb-1">Task <span
                             class="text-red-500">*</span></label>
-                    <textarea id="description" name="description" rows="3" maxlength="251"
+                    <textarea id="task" name="description" rows="3"
                         class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Enter task description" required></textarea>
 
@@ -119,7 +119,7 @@
         const form = document.getElementById('TaskForm');
         const cronField = document.getElementById("cron");
         const cronValidator = document.getElementById("cronValidator");
-        const description = document.getElementById("description");
+        const description = document.getElementById("task");
         const descriptionCounter = $("#descriptionLengthCounter");
 
 
@@ -208,11 +208,11 @@
 
 
 
-            const description = document.getElementById('description').value.trim();
+            const description = document.getElementById('task').value.trim();
             const cron = document.getElementById('cron').value.trim();
             const priority = document.getElementById('priority').value;
             const user = document.getElementById('user').value;
-            const title = document.getElementById('title').value;
+            const title = document.getElementById('task').value;
             const caller = modal.dataset.mode;
             let isEditThenId = 0;
             if (caller === "editTask") {
@@ -284,13 +284,12 @@
         modal.classList.remove("hidden");
 
         // prefill
-        document.getElementById("description").value =
-            row.dataset.description || "";
-        document.getElementById("title").value = row.dataset.title || "";
+        document.getElementById("task").value =
+            row.dataset.task || "";
         document.getElementById("priority").value = row.dataset.priority || "1";
         document.getElementById("user").value = row.dataset.assignee || "";
         document.getElementById("cron").value = row.dataset.cron || "";
-        const description = document.getElementById("description");
+        const description = document.getElementById("task");
 
         const descCounter = document.getElementById("descriptionLengthCounter");
         descCounter.innerText = `${description.value.length} / 250`;

@@ -25,8 +25,7 @@
         <!-- future menu items go here -->
 
         <button type="button" id="HomePage" onclick="window.location.href='HomePage.php'"
-            class="my-2 w-full text-black bg-neutral-primary border border-brand hover:bg-brand hover:text-white focus:ring-4 focus:ring-brand-subtle  leading-5 rounded-lg text-base px-3 py-1.5 focus:outline-none">Home
-            Page</button>
+            class="my-2 w-full text-black bg-neutral-primary border border-brand  leading-5 rounded-lg text-base px-3 py-1.5 focus:outline-none">Tasks</button>
 
 
     </div>

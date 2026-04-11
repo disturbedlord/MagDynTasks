@@ -128,7 +128,7 @@ const renderRow = (row, data, pageNo) => {
   const TR = $(dummyHead).find("tr").first();
   TR.addClass("swipe-row border-b border-gray-300 bg-[#1c1f24]");
   TR.attr("data-id", data[0]);
-  TR.attr("data-description", data[1]);
+  TR.attr("data-task", data[1]);
   TR.attr("data-status", data[2]);
   TR.attr("data-title", data[3]);
   TR.attr("data-priority", data[4]);

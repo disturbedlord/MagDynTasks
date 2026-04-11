@@ -24,9 +24,7 @@
                         </span>
                     </div>
 
-                    <div class="text-gray-700 text-xs break-all w-full">
-                        <?= htmlspecialchars($truncatedDescription) ?>
-                    </div>
+
 
                     <div class="flex flex-row justify-between">
                         <div>

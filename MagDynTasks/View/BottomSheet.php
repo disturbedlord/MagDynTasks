@@ -12,54 +12,130 @@
         <span class="font-semibold text-lg">Filter</span>
         <button id="closeFilter" class="text-gray-500 text-xl">&times;</button>
     </div>
+    <div class="h-[90%] flex flex-col justify-between">
+        <!-- Content -->
+        <div class="p-4 max-h-[60vh]  bg-white relative">
 
-    <!-- Content -->
-    <div class="p-4 max-h-[60vh]  bg-white relative">
+            <div class="bg-white rounded-xl ">
 
-        <div class="bg-white rounded-xl ">
+                <div>
+                    <div class="flex flex-col gap-2 mb-4">
+                        <div class=" font-semibold ">Sort by</div>
+                        <div class=" grid grid-cols-1 md:grid-cols-5 gap-3">
+                            <!-- Sort Buttons -->
 
-            <div>
-                <div class="flex flex-col gap-2 mb-4">
-                    <div class=" font-semibold ">Sort by</div>
-                    <div class=" grid grid-cols-1 md:grid-cols-5 gap-3">
-                        <!-- Sort Buttons -->
-
-                        <div class=" flex flex-row justify-between space-x-2">
-                            <button id="sortDate" data-sortdate=0 data-isSelected="1"
-                                class="w-1/2 border rounded-md items-center justify-between flex flex-row py-2 px-3">
-                                <p class="text-sm text-gray-700">Date</p>
-                                <i id="dateSortIcon" class="text-2xl bi bi-sort-down-alt "></i>
-                            </button>
-                            <button id="sortPriority" data-sortpriority=0 data-isSelected="0"
-                                class="w-1/2 border rounded-md items-center justify-between flex flex-row py-2 px-3 ">
-                                <p class="text-sm text-gray-700">Priority</p>
-                                <i id="prioritySortIcon" class="text-2xl bi bi-sort-numeric-down"></i>
-                            </button>
+                            <div class=" flex flex-row justify-between space-x-2">
+                                <button id="sortDate" data-sortdate=0 data-isSelected="1"
+                                    class="w-1/2 border rounded-md items-center justify-between flex flex-row py-2 px-3">
+                                    <p class="text-sm text-gray-700">Date</p>
+                                    <i id="dateSortIcon" class="text-2xl bi bi-sort-down-alt "></i>
+                                </button>
+                                <button id="sortPriority" data-sortpriority=0 data-isSelected="0"
+                                    class="w-1/2 border rounded-md items-center justify-between flex flex-row py-2 px-3 ">
+                                    <p class="text-sm text-gray-700">Priority</p>
+                                    <i id="prioritySortIcon" class="text-2xl bi bi-sort-numeric-down"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="flex flex-col gap-2">
-                    <div class=" font-semibold">Search by</div>
-                    <div class=" grid grid-cols-1 md:grid-cols-5 gap-3">
-                        <?php if ($is_admin): ?>
-                            <!-- Multi User Select -->
+                    <div class="flex flex-col gap-2">
+                        <div class=" font-semibold">Search by</div>
+                        <div class=" grid grid-cols-1 md:grid-cols-5 gap-3">
+                            <?php if ($is_admin): ?>
+                                <!-- Multi User Select -->
 
+                                <div class="flex-1 w-full">
+                                    <div class="relative">
+
+                                        <!-- BUTTON -->
+                                        <button id="dropdown-button-userSelection"
+                                            class="inline-flex justify-between items-center w-full px-3 py-2 text-sm  bg-white border border-gray-300 rounded-md  focus:outline-none">
+
+                                            <span id="filterSelectedUser" class="text-gray-700">Select Users</span>
+                                            <div class="flex flex-row space-x-2">
+                                                <span id="clearUserBtn"
+                                                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-xs font-medium px-1.5 py-0.5 rounded">Clear</span>
+
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2"
+                                                    viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </button>
+
+                                        <!-- DROPDOWN -->
+                                        <div id="dropdown-menu-userSelection"
+                                            class="hidden absolute right-0 mt-2 w-full bg-white rounded-md  ring-1 ring-black/10 z-50">
+
+                                            <!-- Search -->
+                                            <div class="p-2 border-b">
+                                                <input id="search-input-userSelection"
+                                                    class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none"
+                                                    type="text" placeholder="Search users">
+                                            </div>
+
+                                            <!-- LIST -->
+                                            <ul id="dropdown-list-userSelection"
+                                                class="max-h-60 overflow-y-auto p-2 space-y-1 text-sm">
+
+                                                <?php foreach ($allUsers as $row): ?>
+                                                    <li>
+                                                        <label
+                                                            class="flex items-center gap-2 px-2 py-1 hover:bg-gray-100 rounded cursor-pointer">
+                                                            <input type="checkbox" data-type="userSelection"
+                                                                class="user-checkbox w-4 h-4 border-2 border-gray-600 rounded-sm bg-white checked:bg-gray-800 checked:border-gray-800 focus:ring-0"
+                                                                value="<?= $row['uid'] ?>"
+                                                                data-name="<?= $row['first_name'] ?>">
+                                                            <span>
+                                                                <?= $row['first_name'] ?>
+                                                            </span>
+                                                        </label>
+                                                    </li>
+                                                <?php endforeach; ?>
+
+                                            </ul>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+                            <!-- Title -->
+                            <input type="text" id="filterTitle" placeholder="Search title..."
+                                class="px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
+
+                            <!-- Status -->
+                            <select id="filterStatus"
+                                class="px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gray-300">
+                                <option value="">Status</option>
+
+                                <option value="0">Pending</option>
+                                <option value="1">Finished</option>
+
+                            </select>
+
+                            <!-- Priority -->
                             <div class="flex-1 w-full">
                                 <div class="relative">
 
                                     <!-- BUTTON -->
-                                    <button id="dropdown-button"
+                                    <button id="dropdown-button-prioritySelection"
                                         class="inline-flex justify-between items-center w-full px-3 py-2 text-sm  bg-white border border-gray-300 rounded-md  focus:outline-none">
 
-                                        <span id="filterSelectedUser" class="text-gray-700">Select Users</span>
+                                        <span id="filterSelectedPriority" class="text-gray-700">Select
+                                            Priority</span>
                                         <div class="flex flex-row space-x-2">
-                                            <span id="clearUserBtn"
+                                            <span id="clearPriorityBtn"
                                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-xs font-medium px-1.5 py-0.5 rounded">Clear</span>
 
 
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" viewBox="0 0 20 20"
-                                                fill="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2"
+                                                viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd"
                                                     d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
                                                     clip-rule="evenodd" />
@@ -68,81 +144,51 @@
                                     </button>
 
                                     <!-- DROPDOWN -->
-                                    <div id="dropdown-menu"
+                                    <div id="dropdown-menu-prioritySelection"
                                         class="hidden absolute right-0 mt-2 w-full bg-white rounded-md  ring-1 ring-black/10 z-50">
 
-                                        <!-- Search -->
-                                        <div class="p-2 border-b">
-                                            <input id="search-input"
-                                                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none"
-                                                type="text" placeholder="Search users">
-                                        </div>
-
                                         <!-- LIST -->
-                                        <ul id="dropdown-list" class="max-h-60 overflow-y-auto p-2 space-y-1 text-sm">
+                                        <ul id="dropdown-list-prioritySelection"
+                                            class="max-h-60 overflow-y-auto p-2 space-y-1 text-sm">
 
-                                            <?php foreach ($allUsers as $row): ?>
+                                            <?php for ($i = 1; $i <= 10; $i++): ?>
                                                 <li>
                                                     <label
                                                         class="flex items-center gap-2 px-2 py-1 hover:bg-gray-100 rounded cursor-pointer">
-                                                        <input type="checkbox" data-type="userSelection"
-                                                            class="user-checkbox w-4 h-4 border-2 border-gray-600 rounded-sm bg-white checked:bg-gray-800 checked:border-gray-800 focus:ring-0"
-                                                            value="<?= $row['uid'] ?>" data-name="<?= $row['first_name'] ?>">
+                                                        <input type="checkbox" data-type="prioritySelection"
+                                                            class="priority-checkbox w-4 h-4 border-2 border-gray-600 rounded-sm bg-white checked:bg-gray-800 checked:border-gray-800 focus:ring-0"
+                                                            value="<?= $i ?>" data-name="<?= $i ?>">
                                                         <span>
-                                                            <?= $row['first_name'] ?>
+                                                            <?= "Priority " . $i ?>
                                                         </span>
                                                     </label>
                                                 </li>
-                                            <?php endforeach; ?>
+                                            <?php endfor; ?>
 
                                         </ul>
+
                                     </div>
-
-
                                 </div>
                             </div>
-                        <?php endif; ?>
-
-                        <!-- Title -->
-                        <input type="text" id="filterTitle" placeholder="Search title..."
-                            class="px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-
-                        <!-- Status -->
-                        <select id="filterStatus"
-                            class="px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gray-300">
-                            <option value="">Status</option>
-
-                            <option value="0">Pending</option>
-                            <option value="1">Finished</option>
-
-                        </select>
-                        <!-- Priority -->
-                        <select id="filterPriority"
-                            class="px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gray-300">
-                            <option value="">Priority (1–10)</option>
-                            <?php for ($i = 1; $i <= 10; $i++): ?>
-                                <option value="<?= $i ?>">Priority <?= $i ?></option>
-                            <?php endfor; ?>
-                        </select>
-
-
-
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Footer -->
+        <div class="p-4 border-t flex gap-2">
+            <button id="resetFilter" class="w-1/2 px-4 py-2 bg-gray-200 rounded-md">
+                Reset
+            </button>
+
+            <button id="applyFilter" class="w-1/2 px-4 py-2 bg-blue-600 text-white rounded-md">
+                Apply
+            </button>
+        </div>
     </div>
 
-    <!-- Footer -->
-    <div class="p-4 border-t flex gap-2">
-        <button id="resetFilter" class="w-1/2 px-4 py-2 bg-gray-200 rounded-md">
-            Reset
-        </button>
+</div>
 
-        <button id="applyFilter" class="w-1/2 px-4 py-2 bg-blue-600 text-white rounded-md">
-            Apply
-        </button>
-    </div>
 </div>
 
 <script>
@@ -150,7 +196,9 @@
     const sortDateBtn = document.getElementById("sortDate");
     const sortPriorityBtn = document.getElementById("sortPriority");
     const checkboxes = document.querySelectorAll('.user-checkbox');
+    const priorityCheckboxes = document.querySelectorAll('.priority-checkbox');
     const selectedText = document.getElementById('filterSelectedUser');
+    const selectedTextPriority = document.getElementById('filterSelectedPriority');
 
     let StoreFilter;
 
@@ -220,32 +268,50 @@
             document.getElementById('closeFilter').addEventListener('click', closeFilter);
             overlay.addEventListener('click', closeFilter);
 
-            const dropdownBtn = document.getElementById('dropdown-button');
-            const dropdownMenu = document.getElementById('dropdown-menu');
+            const dropdownBtnUserSelection = document.getElementById('dropdown-button-userSelection');
+            const dropdownMenuUserSelection = document.getElementById('dropdown-menu-userSelection');
 
-            // Toggle dropdown
-            dropdownBtn?.addEventListener('click', () => {
-                dropdownMenu.classList.toggle('hidden');
+            const dropdownBtnPrioritySelection = document.getElementById('dropdown-button-prioritySelection');
+            const dropdownMenuPrioritySelection = document.getElementById('dropdown-menu-prioritySelection');
+
+            // Toggle User Selection dropdown
+            dropdownBtnUserSelection?.addEventListener('click', () => {
+                dropdownMenuUserSelection.classList.toggle('hidden');
+            });
+
+            // Toggle Priority Selection dropdown
+            dropdownBtnPrioritySelection?.addEventListener('click', () => {
+                dropdownMenuPrioritySelection.classList.toggle('hidden');
             });
 
             // Close when clicking outside
             document.addEventListener('click', (e) => {
-                if (!dropdownBtn?.contains(e.target) && !dropdownMenu?.contains(e.target)) {
-                    dropdownMenu?.classList.add('hidden');
+                if (!dropdownBtnUserSelection?.contains(e.target) && !dropdownMenuUserSelection?.contains(e.target)) {
+                    dropdownMenuUserSelection?.classList.add('hidden');
                 }
+
+                if (!dropdownBtnPrioritySelection?.contains(e.target) && !dropdownMenuPrioritySelection?.contains(e.target)) {
+                    dropdownMenuPrioritySelection?.classList.add('hidden');
+                }
+
             });
 
 
 
-            // Listen to checkbox changes
+            // Listen to user checkbox changes
             checkboxes.forEach(cb => {
                 cb.addEventListener('change', updateSelected);
             });
 
-            document.getElementById('search-input')?.addEventListener('input', function () {
+            // Listen to Priority checkbox changes
+            priorityCheckboxes.forEach(cb => {
+                cb.addEventListener('change', updateSelectedPriority);
+            });
+
+            document.getElementById('search-input-userSelection')?.addEventListener('input', function () {
                 const val = this.value.toLowerCase();
 
-                document.querySelectorAll('#dropdown-list li')?.forEach(li => {
+                document.querySelectorAll('#dropdown-list-userSelection li')?.forEach(li => {
                     li.style.display = li.innerText.toLowerCase().includes(val)
                         ? ''
                         : 'none';
@@ -259,14 +325,14 @@
                 isFilterApplied = true;
                 // Save Filter in Global State
                 StoreFilter.setFilter({
-                    title: $("#filterTitle").val(),
-                    status: $("#filterStatus").val(),
-                    priority: $("#filterPriority").val(),
-                    uid: $("#filterSelectedUser").attr("data-selectedids"),
-                    sortByDate: $("#sortDate").attr("data-isSelected"),
-                    sortDate: $("#sortDate").attr("data-sortdate"),
-                    sortByPriority: $("#sortPriority").attr("data-isSelected"),
-                    sortPriority: $("#sortPriority").attr("data-sortpriority")
+                    title: $("#filterTitle").val() ?? '',
+                    status: $("#filterStatus").val() ?? '',
+                    priority: $("#filterSelectedPriority").attr("data-selectedpriorities") ?? '',
+                    uid: $("#filterSelectedUser").attr("data-selectedids") ?? '',
+                    sortByDate: $("#sortDate").attr("data-isSelected") ?? '',
+                    sortDate: $("#sortDate").attr("data-sortdate") ?? '',
+                    sortByPriority: $("#sortPriority").attr("data-isSelected") ?? '',
+                    sortPriority: $("#sortPriority").attr("data-sortpriority") ?? ''
                 });
 
                 $('#loader').toggleClass('hidden');
@@ -279,6 +345,13 @@
                 checkboxes.forEach(cb => {
                     cb.checked = false;
                 });
+
+                // Clear all checkboxes
+                priorityCheckboxes.forEach(cb => {
+                    cb.checked = false;
+                });
+
+
                 // Clear Global State
                 StoreFilter.setFilter({});
 
@@ -291,6 +364,26 @@
                 $("#filterSelectedUser").text("Select Users");
                 $("#filterSelectedUser").attr("data-selectedids", "");
                 checkboxes.forEach(cb => {
+                    cb.checked = false;
+                });
+
+                // Clear all checkboxes
+                priorityCheckboxes.forEach(cb => {
+                    cb.checked = false;
+                });
+                e.stopPropagation(); // Prevent parent click
+            })
+
+            $("#clearPriorityBtn").on("click", (e) => {
+                $("#filterSelectedPriority").val("");
+                $("#filterSelectedPriority").text("Select Priority");
+                $("#filterSelectedPriority").attr("data-selectedPriorities", "");
+                checkboxes.forEach(cb => {
+                    cb.checked = false;
+                });
+
+                // Clear all checkboxes
+                priorityCheckboxes.forEach(cb => {
                     cb.checked = false;
                 });
                 e.stopPropagation(); // Prevent parent click
@@ -319,6 +412,24 @@
         selectedText.setAttribute("data-selectedids", existingSelectedIds);
     }
 
+    // Update selected text
+    function updateSelectedPriority() {
+
+
+        const selectedIds = [...priorityCheckboxes]
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        if (selectedIds.length === 0) {
+            selectedTextPriority.innerText = "Select Priority";
+        } else {
+            selectedTextPriority.innerText = selectedIds.join(', ');
+        }
+        let existingSelectedIds = selectedTextPriority.getAttribute("data-selectedPriorities") ?? "";
+        existingSelectedIds = selectedIds;
+        selectedTextPriority.setAttribute("data-selectedPriorities", existingSelectedIds);
+    }
+
 
 
     const SetFilter = (clearFilter = false) => {
@@ -328,6 +439,11 @@
             $("#filterSelectedUser").val("");
             $("#filterSelectedUser").text("Select Users");
             $("#filterSelectedUser").attr("data-selectedids", "");
+
+            $("#filterSelectedPriority").val("");
+            $("#filterSelectedPriority").text("Select Priority");
+            $("#filterSelectedPriority").attr("data-selectedPriorities", "");
+
             $("#filterStatus").val("");
             activate(sortDateBtn, sortPriorityBtn);
             $("#sortDate").attr("data-sortDate", 0);
@@ -351,6 +467,7 @@
                 document.getElementById("prioritySortIcon").classList = sortPriority === "0" ? "text-2xl bi bi-sort-numeric-down" : "text-2xl bi bi-sort-numeric-up"
                 $("#sortPriority").attr("data-sortPriority", sortPriority);
 
+                // Populate Selected Users
                 const userIdsToCheck = uid.split(",");
 
                 document.querySelectorAll("input[data-type='userSelection']").forEach(cb => {
@@ -358,6 +475,15 @@
                 });
 
                 updateSelected();
+
+                // Populate Selected Priorities
+                const prioritiesToCheck = priority.split(",");
+
+                document.querySelectorAll("input[data-type='prioritySelection']").forEach(cb => {
+                    cb.checked = prioritiesToCheck.includes(cb.value);
+                });
+
+                updateSelectedPriority();
             }
         }
     }

@@ -13,8 +13,12 @@
     ?>
     <script src="../Script/root.js"></script>
 </head>
-<div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
 
+<div class="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
+
+    <div class="absolute top-[20%]">
+        <p class="text-3xl font-semibold">MagDyn ERP</p>
+    </div>
     <!-- Card -->
     <div class="w-full max-w-md bg-white rounded-xl shadow-md p-6">
 
@@ -63,6 +67,7 @@
     <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-2"></div>
 
 </div>
+<script type="module" src="../Script/Xoid.js"></script>
 
 <script>
     const loginTab = document.getElementById('loginTab');
@@ -116,6 +121,9 @@
         })
             .then(res => res.json())
             .then(data => {
+                // Destroying any existing state
+                window?.xoid?.destroyState();
+
                 if (data.status) {
                     window.location.href = "HomePage.php";
                 } else {
