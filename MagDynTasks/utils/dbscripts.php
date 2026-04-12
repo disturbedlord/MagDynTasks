@@ -33,6 +33,6 @@ LEFT JOIN user_account d
 $searchTitle = " e.title LIKE  ? ";
 $searchDescription = " e.description LIKE  ? ";
 $searchStatus = " e.done = ? ";
-$searchPriority = " e.priority = ? ";
+$searchPriority = " e.priority in (?) ";
 $searchUid = " e.uid in (?) ";
 ?>

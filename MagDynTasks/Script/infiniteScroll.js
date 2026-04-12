@@ -6,6 +6,8 @@ let clusterize = undefined;
 let scrollReached = false;
 let totalPages = 0;
 
+const pageHeightCache = new Map(); // add this with your other globals
+
 // ── Spacer state ──────────────────────────────────────────────────────────────
 // Instead of removing rows and correcting scrollTop (which always jumps),
 // we grow a spacer <tr> by the exact height of removed rows.
@@ -58,7 +60,7 @@ const NoResult = () => {
 };
 
 const EndOfList = () => {
-  return `<tr><td><div id="endOfList" class="p-1 text-xs text-gray-500 text-center">
+  return `<tr data-endOfList><td><div id="endOfList" class="p-1 text-xs text-gray-500 text-center">
                     <p>— You've reached the end —</p>
                 </div></td></tr>`;
 };
@@ -72,7 +74,7 @@ const getFilters = () => {
   } else {
     return {
       title: $("#filterTitle").val(),
-      status: $("#filterStatus").val(),
+      status: $("input[name='list-radio']:checked").val(),
       priority: $("#filterPriority").val(),
       uid: $("#filterSelectedUser").attr("data-selectedids"),
       sortByDate: $("#sortDate").attr("data-isSelected"),
@@ -143,13 +145,18 @@ const renderRow = (row, data, pageNo) => {
 
 // ── Core load ─────────────────────────────────────────────────────────────────
 
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function loadNextPage(direction, options = {}) {
   const scrollEl = document.getElementById("scroll-container");
+  let pageToFetch = 0;
   // reset banner
   switch (direction) {
     // ── Scroll DOWN ───────────────────────────────────────────────────────────
     case "down": {
-      const pageToFetch = nextPageToFetch();
+      pageToFetch = nextPageToFetch();
 
       if (pageToFetch + 1 === totalPages && bottomSpacerHeight > 0) {
         bottomSpacerHeight = 0;
@@ -161,43 +168,36 @@ async function loadNextPage(direction, options = {}) {
       const data = await fetchPage(pageToFetch);
       const newRows = data.map((row) => renderRow(row[8], row, pageToFetch));
       if (bottomSpacerHeight > 0) {
-        const measureContainer = document.createElement("tbody");
-        measureContainer.style.position = "absolute";
-        measureContainer.style.visibility = "hidden";
-        document.body.appendChild(measureContainer);
-
-        measureContainer.innerHTML = newRows.join("");
-
         let realAddedHeight = 0;
-        $(`tr[data-page="${pageToFetch}"]`).each(function () {
-          realAddedHeight += $(this).outerHeight(true);
-        });
-        document.body.removeChild(measureContainer);
+        if (pageHeightCache.has(pageToFetch)) {
+          realAddedHeight = pageHeightCache.get(pageToFetch);
+        } else {
+          const measureContainer = document.createElement("tbody");
+          measureContainer.style.position = "absolute";
+          measureContainer.style.visibility = "hidden";
+          document.body.appendChild(measureContainer);
 
+          measureContainer.innerHTML = newRows.join("");
+          $(`tr[data-page="${pageToFetch}"]`).each(function () {
+            realAddedHeight += $(this).outerHeight(true);
+          });
+          document.body.removeChild(measureContainer);
+        }
         bottomSpacerHeight -= realAddedHeight;
       }
 
-      if (pageToFetch + 1 >= Math.ceil(totalRecords / pageSize)) {
-        //   Last Page
-        newRows.push(EndOfList());
-      }
       // Insert before bottom spacer sentinel (last slot)
       allRows.splice(allRows.length - 1, 0, ...newRows);
 
       const pageToRemove = pageToFetch - 2;
       if (pageToRemove >= 0 && pageCache.has(pageToRemove)) {
-        // ── Measure height BEFORE repaint ─────────────────────────────────
-        const removedHeight = measurePageHeight(pageToRemove);
+        const removedHeight = measurePageHeight(pageToRemove); // still in DOM here
 
-        // ── Drop rows from allRows ────────────────────────────────────────
+        pageHeightCache.set(pageToRemove, removedHeight); // ← cache it before eviction
+
         allRows = allRows.filter(
           (html) => !html.includes(`data-page="${pageToRemove}"`),
         );
-
-        // ── Grow TOP spacer by exact removed height ───────────────────────
-        // scrollHeight = topSpacer + realRows + bottomSpacer
-        // topSpacer grows by removedHeight → scrollHeight unchanged
-        // → scrollbar thumb stays put, zero correction needed
         topSpacerHeight += removedHeight;
         syncSpacers();
       }
@@ -209,18 +209,13 @@ async function loadNextPage(direction, options = {}) {
     // ── Scroll UP ─────────────────────────────────────────────────────────────
     case "up": {
       const scrollEl = document.getElementById("scroll-container");
-
       const topPage = getFirstRenderedPage();
       const pageToPrepend = topPage - 1;
-      if (pageToPrepend < 0) {
-        return;
-      }
+      if (pageToPrepend < 0) return;
 
-      if (pageToPrepend === 0) {
-        if (topSpacerHeight > 0) {
-          topSpacerHeight = 0;
-          syncSpacers();
-        }
+      if (pageToPrepend === 0 && topSpacerHeight > 0) {
+        topSpacerHeight = 0;
+        syncSpacers();
       }
 
       const data = pageCache.has(pageToPrepend)
@@ -229,45 +224,32 @@ async function loadNextPage(direction, options = {}) {
 
       const newRows = data.map((row) => renderRow(row[8], row, pageToPrepend));
 
-      // ── Measure OFF-DOM ─────────────────────────────────────────
-      const measureContainer = document.createElement("tbody");
-      measureContainer.style.position = "absolute";
-      measureContainer.style.visibility = "hidden";
-      document.body.appendChild(measureContainer);
-
-      measureContainer.innerHTML = newRows.join("");
-
-      let realAddedHeight = 0;
-      $(`tr[data-page="${pageToPrepend}"]`).each(function () {
-        realAddedHeight += $(this).outerHeight(true);
-      });
-      document.body.removeChild(measureContainer);
-
-      // ── Insert rows at top ──────────────────────────────────────
-      allRows.splice(1, 0, ...newRows);
-
-      // ── Remove bottom page ──────────────────────────────────────
+      // Remove bottom page FIRST, before touching allRows
       const pageToRemove = pageToPrepend + 2;
-
       if (pageToRemove < totalPages && pageCache.has(pageToRemove)) {
-        const removedHeight = measurePageHeight(pageToRemove);
+        const removedHeight = measurePageHeight(pageToRemove); // still in DOM here
+
+        pageHeightCache.set(pageToRemove, removedHeight); // ← cache it before eviction
 
         allRows = allRows.filter(
           (html) => !html.includes(`data-page="${pageToRemove}"`),
         );
 
+        allRows = allRows.filter((html) => !html.includes("data-endOfList"));
+        const endOfListHeight = $("tr[data-endOfList]").outerHeight(true);
         bottomSpacerHeight += removedHeight;
       }
 
-      // ── Adjust top spacer ───────────────────────────────────────
+      // Insert rows at top
+      allRows.splice(1, 0, ...newRows);
+
+      const realAddedHeight = pageHeightCache.get(pageToPrepend) ?? 0;
       topSpacerHeight = Math.max(0, topSpacerHeight - realAddedHeight);
-      syncSpacers();
 
-      // ── Save scroll position ────────────────────────────────────
       const prevScrollTop = scrollEl.scrollTop;
-
+      syncSpacers();
       clusterize.update(allRows);
-      scrollEl.scrollTop = prevScrollTop;
+      scrollEl.scrollTop = prevScrollTop; // compensate for prepended content
 
       break;
     }
@@ -297,6 +279,20 @@ async function loadNextPage(direction, options = {}) {
       reloadTable();
       break;
     }
+  }
+
+  if (
+    allRows.length > 0 &&
+    direction === "down" &&
+    $("tr[data-endOfList]").length === 0 &&
+    pageToFetch + 1 >= Math.ceil(totalRecords / pageSize)
+  ) {
+    allRows.splice(allRows.length - 1, 0, EndOfList());
+  }
+
+  if (direction === "up" && $("tr[data-endOfList]").length !== 0) {
+    // EndOfList COmponent exist and page scrolled up
+    $("tr[data-endOfList]").remove();
   }
 
   if (allRows.length === 2) {
@@ -338,14 +334,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ Fix: Account for top spacer height
     const nearTop = scrollTop <= topSpacerHeight + 100;
 
-    if (nearBottom) {
+    if (nearBottom && !nearTop) {
       if (nextPageToFetch() === -1) return;
       scrollReached = true;
       $("#bottomSpinner").toggleClass("hidden");
       await loadNextPage("down");
       $("#bottomSpinner").toggleClass("hidden");
       scrollReached = false;
-    } else if (nearTop) {
+    } else if (nearTop && !nearBottom) {
       if (getFirstRenderedPage() === 0) return; // Already at first page
       scrollReached = true;
       $("#topSpinner").toggleClass("hidden");

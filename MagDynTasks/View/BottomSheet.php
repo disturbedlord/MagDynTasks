@@ -110,14 +110,28 @@
                                 class="px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
 
                             <!-- Status -->
-                            <select id="filterStatus"
-                                class="px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gray-300">
-                                <option value="">Status</option>
+                            <h3 class="font-semibold text-heading">Status</h3>
+                            <ul
+                                class="items-center w-full text-sm font-medium text-heading bg-neutral-primary-soft border border-default rounded-lg flex flex-row">
+                                <li class="w-full border-b border-default sm:border-b-0 sm:border-r">
+                                    <div class="flex flex-row items-center ps-3">
+                                        <input id="horizontal-list-radio-license" type="radio" value="0"
+                                            name="list-radio"
+                                            class="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle border border-default appearance-none">
+                                        <label for="horizontal-list-radio-license"
+                                            class="w-full py-2 select-none ms-2 text-sm font-medium text-heading">Pending</label>
+                                    </div>
+                                </li>
+                                <li class="w-full border-l border-b border-default sm:border-b-0 sm:border-r">
+                                    <div class="flex items-center ps-3">
+                                        <input id="horizontal-list-radio-id" type="radio" value="1" name="list-radio"
+                                            class="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle border border-default appearance-none">
+                                        <label for="horizontal-list-radio-id"
+                                            class="w-full py-2 select-none ms-2 text-sm font-medium text-heading">Finished</label>
+                                    </div>
+                                </li>
+                            </ul>
 
-                                <option value="0">Pending</option>
-                                <option value="1">Finished</option>
-
-                            </select>
 
                             <!-- Priority -->
                             <div class="flex-1 w-full">
@@ -326,7 +340,7 @@
                 // Save Filter in Global State
                 StoreFilter.setFilter({
                     title: $("#filterTitle").val() ?? '',
-                    status: $("#filterStatus").val() ?? '',
+                    status: $("input[name='list-radio']:checked").val() ?? '',
                     priority: $("#filterSelectedPriority").attr("data-selectedpriorities") ?? '',
                     uid: $("#filterSelectedUser").attr("data-selectedids") ?? '',
                     sortByDate: $("#sortDate").attr("data-isSelected") ?? '',
@@ -401,15 +415,16 @@
         const selectedIds = [...checkboxes]
             .filter(cb => cb.checked)
             .map(cb => cb.value);
-
-        if (selected.length === 0) {
-            selectedText.innerText = "Select Users";
-        } else {
-            selectedText.innerText = selected.join(', ');
+        if (selectedText) {
+            if (selected.length === 0) {
+                selectedText.innerText = "Select Users";
+            } else {
+                selectedText.innerText = selected.join(', ');
+            }
+            let existingSelectedIds = selectedText.getAttribute("data-selectedids") ?? "";
+            existingSelectedIds = selectedIds;
+            selectedText.setAttribute("data-selectedids", existingSelectedIds);
         }
-        let existingSelectedIds = selectedText.getAttribute("data-selectedids") ?? "";
-        existingSelectedIds = selectedIds;
-        selectedText.setAttribute("data-selectedids", existingSelectedIds);
     }
 
     // Update selected text
@@ -444,7 +459,7 @@
             $("#filterSelectedPriority").text("Select Priority");
             $("#filterSelectedPriority").attr("data-selectedPriorities", "");
 
-            $("#filterStatus").val("");
+            $("input[name='list-radio']").prop("checked", false);
             activate(sortDateBtn, sortPriorityBtn);
             $("#sortDate").attr("data-sortDate", 0);
 
@@ -458,7 +473,7 @@
                 const { title, priority, uid, status, sortDate, sortByDate, sortPriority, sortByPriority } = StoreFilter?.value?.value;
                 $("#filterTitle").val(title);
                 $("#filterPriority").val(priority);
-                $("#filterStatus").val(status);
+                $(`input[name='list-radio'][value='${status}']`).prop("checked", true);
                 sortByDate === "1" ? activate(sortDateBtn, sortPriorityBtn) : activate(sortPriorityBtn, sortDateBtn);
 
                 document.getElementById("dateSortIcon").classList = sortDate === "0" ? "text-2xl bi bi-sort-down-alt" : "text-2xl bi bi-sort-up-alt"

@@ -3,6 +3,7 @@ session_start();
 require '../../config.php';
 require 'helper.php';
 require "../utils/dbscripts.php";
+date_default_timezone_set('Asia/Kolkata');
 
 $action = isset($_POST['action']) ? $_POST['action'] : '';
 switch ($action) {

@@ -18,7 +18,6 @@ $filter = isset($_GET['filter']) ? $_GET['filter'] : [];
 
 $title = isset($filter['title']) ? $filter['title'] : '';
 $status = isset($filter['status']) ? $filter['status'] : '';
-$priority = isset($filter['priority']) ? $filter['priority'] : '';
 $sortDate = isset($filter["sortDate"]) ? $filter["sortDate"] : "0";
 $sortByDate = (isset($filter["sortByDate"]) && $filter["sortByDate"] === "1") ? true : false;
 $sortPriority = isset($filter["sortPriority"]) ? $filter["sortPriority"] : "0";
@@ -26,6 +25,9 @@ $sortByPriority = (isset($filter["sortByPriority"]) && $filter["sortByPriority"]
 
 $uid = isset($filter['uid']) ? $filter['uid'] : '';
 $uidArray = explode(",", $uid);
+$priority = isset($filter['priority']) ? $filter['priority'] : '';
+$priorityArray = explode(",", $priority);
+
 
 
 $appliedFilters = [];
@@ -83,9 +85,10 @@ if ($title) {
     $types .= "s";
 }
 if ($priority) {
-    $appliedFilters[] = $searchPriority;
-    $params[] = $priority;
-    $types .= "i";
+    $placeholder = implode(",", array_fill(0, count($priorityArray), "?"));
+    $appliedFilters[] = " e.priority in ({$placeholder})";
+    $params = array_merge($params, $priorityArray);
+    $types .= implode("", array_fill(0, count($priorityArray), "i"));
 }
 if ($uid) {
     $placeholder = implode(",", array_fill(0, count($uidArray), "?"));
@@ -121,7 +124,7 @@ if (!$export)
 
 file_put_contents(
     "debug.log",
-    print_r($_POST, true) . "\n" .
+    print_r($_GET, true) . "\n" .
     print_r($query, true) . "\n" .
     print_r($params, true) . PHP_EOL,
     FILE_APPEND
