@@ -55,7 +55,7 @@ const nextPageToFetch = () => {
 
 const NoResult = () => {
   return `<div>
-      <p class='text-sm'>No Result</p>
+      <p class='text-sm text-center p-4'>No Result</p>
     </div>`;
 };
 
@@ -68,8 +68,8 @@ const EndOfList = () => {
 // ── Fetch ─────────────────────────────────────────────────────────────────────
 
 const getFilters = () => {
-  const Store = window.xoid;
-  if (Object.keys(Store?.filter?.value?.value).length > 0) {
+  const Store = window?.xoid;
+  if (Store && Object.keys(Store?.filter?.value?.value).length > 0) {
     return Store?.filter?.value?.value;
   } else {
     return {
@@ -281,21 +281,7 @@ async function loadNextPage(direction, options = {}) {
     }
   }
 
-  if (
-    allRows.length > 0 &&
-    direction === "down" &&
-    $("tr[data-endOfList]").length === 0 &&
-    pageToFetch + 1 >= Math.ceil(totalRecords / pageSize)
-  ) {
-    allRows.splice(allRows.length - 1, 0, EndOfList());
-  }
-
-  if (direction === "up" && $("tr[data-endOfList]").length !== 0) {
-    // EndOfList COmponent exist and page scrolled up
-    $("tr[data-endOfList]").remove();
-  }
-
-  if (allRows.length === 2) {
+  if ($("tr[data-page]").length === 0) {
     //   No Records, only top and bottom spacer
     allRows.splice(1, 0, NoResult());
     Repaint();
@@ -428,7 +414,7 @@ $("#scroll-content").listSwipe({
   itemSelector: ">",
 
   // The width of action button
-  itemActionWidth: 80,
+  itemActionWidth: 215,
 
   // Whether there is an action on the left
   leftAction: true,
@@ -446,7 +432,7 @@ $("#scroll-content").listSwipe({
   closeOnOpen: true,
 
   // Number of pixels in the Y-axis before preventing swiping
-  maxYDelta: 40,
+  maxYDelta: 1000,
 
   // Number of pixels in the X-axis before allowing swiping
   initialXDelta: 25,

@@ -63,7 +63,7 @@ $types = "";
 $isWHEREAdded = false;
 
 if (!$isAdminFlag) {
-    $appliedFilters[] = " WHERE e.department = ?";
+    $appliedFilters[] = " WHERE " . $GETSPECIFICUSERROWS;
     $params[] = $loggedInUserId;
     $types .= "i";
     $isWHEREAdded = true;
@@ -92,7 +92,7 @@ if ($priority) {
 }
 if ($uid) {
     $placeholder = implode(",", array_fill(0, count($uidArray), "?"));
-    $appliedFilters[] = " e.department in ({$placeholder})";
+    $appliedFilters[] = str_replace("?", $placeholder, $GETSPECIFICUSERROWS);
     $params = array_merge($params, $uidArray);
     $types .= implode("", array_fill(0, count($uidArray), "i"));
 }
@@ -105,7 +105,7 @@ if ($status !== '') {
 $query .= implode(" AND ", $appliedFilters);
 $countQuery .= implode(" AND ", $appliedFilters);
 
-
+$query .= " GROUP BY e.id ";
 
 $query .= " ORDER BY ";
 
@@ -116,6 +116,8 @@ if ($sortByDate) {
     $sortPriorityValue = $sortPriority === "0" ? "ASC" : "DESC";
     $query .= " CAST(e.priority AS UNSIGNED) {$sortPriorityValue} ";
 }
+
+
 
 
 if (!$export)

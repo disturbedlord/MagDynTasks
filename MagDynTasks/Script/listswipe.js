@@ -1,5 +1,7 @@
 (function () {
   $.fn.listSwipe = function (options) {
+    // Default setting if setting not given during initialization
+    // Initialized in infiniteScroll.js
     var settings = $.extend(
       {
         itemSelector: ">", //The item in the list that has the side actions

@@ -12,7 +12,9 @@ function parseRow($row)
     $creatorId = $row["user_account_id"];
     $assigneeId = $row["department"];
     $date = date("d-m-y", strtotime($row['time']));
-    $assginee = $row['assignee'];
+
+    $assignees = explode(",", $row["assignees"]);
+    $assigneesId = explode(",", $row["assigneesId"]);
     // 🕒 Format time
     $time = date("d M, g:i A", strtotime($row['time']));
     ;
@@ -44,7 +46,8 @@ function parseRow($row)
         $date,
         $assginee,
         $name,
-        $assigneeId
+        $assigneesId,
+        $assignees
     ];
 }
 

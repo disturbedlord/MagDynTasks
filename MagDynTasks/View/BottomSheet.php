@@ -52,7 +52,7 @@
                                         <button id="dropdown-button-userSelection"
                                             class="inline-flex justify-between items-center w-full px-3 py-2 text-sm  bg-white border border-gray-300 rounded-md  focus:outline-none">
 
-                                            <span id="filterSelectedUser" class="text-gray-700">Select Users</span>
+                                            <span id="filterSelectedUser" class="text-gray-700">Select Assignees</span>
                                             <div class="flex flex-row space-x-2">
                                                 <span id="clearUserBtn"
                                                     class="bg-neutral-secondary-medium border border-default-medium text-heading text-xs font-medium px-1.5 py-0.5 rounded">Clear</span>
@@ -112,14 +112,14 @@
                             <!-- Status -->
                             <h3 class="font-semibold text-heading">Status</h3>
                             <ul
-                                class="items-center w-full text-sm font-medium text-heading bg-neutral-primary-soft border border-default rounded-lg flex flex-row">
+                                class="items-center w-full text-sm  text-heading bg-neutral-primary-soft border border-default rounded-lg flex flex-row">
                                 <li class="w-full border-b border-default sm:border-b-0 sm:border-r">
                                     <div class="flex flex-row items-center ps-3">
                                         <input id="horizontal-list-radio-license" type="radio" value="0"
                                             name="list-radio"
                                             class="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle border border-default appearance-none">
                                         <label for="horizontal-list-radio-license"
-                                            class="w-full py-2 select-none ms-2 text-sm font-medium text-heading">Pending</label>
+                                            class="w-full py-2 select-none ms-2 text-sm text-gray-700 text-heading">Pending</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-l border-b border-default sm:border-b-0 sm:border-r">
@@ -127,7 +127,7 @@
                                         <input id="horizontal-list-radio-id" type="radio" value="1" name="list-radio"
                                             class="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle border border-default appearance-none">
                                         <label for="horizontal-list-radio-id"
-                                            class="w-full py-2 select-none ms-2 text-sm font-medium text-heading">Finished</label>
+                                            class="w-full py-2 select-none ms-2 text-sm text-gray-700 text-heading">Finished</label>
                                     </div>
                                 </li>
                             </ul>
@@ -375,16 +375,13 @@
 
             $("#clearUserBtn").on("click", (e) => {
                 $("#filterSelectedUser").val("");
-                $("#filterSelectedUser").text("Select Users");
+                $("#filterSelectedUser").text("Select Assignees");
                 $("#filterSelectedUser").attr("data-selectedids", "");
                 checkboxes.forEach(cb => {
                     cb.checked = false;
                 });
 
-                // Clear all checkboxes
-                priorityCheckboxes.forEach(cb => {
-                    cb.checked = false;
-                });
+
                 e.stopPropagation(); // Prevent parent click
             })
 
@@ -392,9 +389,6 @@
                 $("#filterSelectedPriority").val("");
                 $("#filterSelectedPriority").text("Select Priority");
                 $("#filterSelectedPriority").attr("data-selectedPriorities", "");
-                checkboxes.forEach(cb => {
-                    cb.checked = false;
-                });
 
                 // Clear all checkboxes
                 priorityCheckboxes.forEach(cb => {
@@ -417,7 +411,7 @@
             .map(cb => cb.value);
         if (selectedText) {
             if (selected.length === 0) {
-                selectedText.innerText = "Select Users";
+                selectedText.innerText = "Select Assignees";
             } else {
                 selectedText.innerText = selected.join(', ');
             }
@@ -452,7 +446,7 @@
             $("#filterTitle").val("");
             $("#filterPriority").val("");
             $("#filterSelectedUser").val("");
-            $("#filterSelectedUser").text("Select Users");
+            $("#filterSelectedUser").text("Select Assignees");
             $("#filterSelectedUser").attr("data-selectedids", "");
 
             $("#filterSelectedPriority").val("");

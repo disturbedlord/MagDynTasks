@@ -34,23 +34,32 @@ switch ($action) {
         $title = isset($_POST["title"]) ? $_POST["title"] : "";
         $done = 0;
         $time = date("Y-m-d H:i:s"); // current timestamp
-        $department = $_POST['user'];
+        $department = $_POST['assignees'];
+        $assigneesList = explode(",", $department);
+
+        $queriesExecuted = 0;
         // echo $task . "<br/>" . $cron . "<br/>" . $priority . "<br/>" . $user . "<br/>" . $title . "<br/>" . $done . "<br/>" . $time . "<br/>" . $department;
-        $stmt = $con->prepare("INSERT INTO events(uid , description , done , time , priority , title , department , cron) VALUES(?,?,?,?,?,?,?,?)");
+        $stmt = $con->prepare("INSERT INTO events(uid , description , done , time , priority , title , cron) VALUES(?,?,?,?,?,?,?)");
         // bind parameters
         $stmt->bind_param(
-            "isisssis",
+            "isissss",
             $user,       // uid (int)
             $task,       // description (string)
             $done,       // done (int)
             $time,       // time (string)
             $priority,   // priority (string) → s
             $title,      // title (string)
-            $department, // department (int) → i
             $cron        // cron (string)
         );
         $dbCall = $stmt->execute();
-        echo json_encode(["status" => true, "isEdit" => false]);
+        $eventId = $stmt->insert_id;
+        $taskAssigneesCreated = createTaskAssignessEntry($eventId, $assigneesList);
+
+        if ($stmt->affected_rows > 0 && $taskAssigneesCreated > 0) {
+            echo json_encode(["status" => true, "isEdit" => false]);
+        } else {
+            echo json_encode(["status" => false, "isEdit" => false]);
+        }
         break;
     }
     case "editTask": {
@@ -59,26 +68,34 @@ switch ($action) {
         $cron = $_POST["cron"];
         $priority = $_POST["priority"];
         $createdBy = $_SESSION['user_id'];
-        $assignedTo = $_POST["user"];
+        $assignees = explode(",", $_POST["assignees"]);
         $title = $_POST["title"];
         $done = 0;
         $time = date("Y-m-d H:i:s"); // current timestamp
-        $stmt = $con->prepare("Update events set uid=? , description=? , done=? , time=? , priority=? , title=? , department=?,cron=? WHERE id=?");
+        // Update Events
+        $stmt = $con->prepare("Update events set uid=? , description=? , done=? , time=? , priority=? , title=? , cron=? WHERE id=?");
         // bind parameters
         $stmt->bind_param(
-            "isisssssi", // types: i=int, s=string
+            "isissssi", // types: i=int, s=string
             $createdBy,      // uid (int)
             $description,      // description (string)
             $done,      // done (int)
             $time,      // time (string)
             $priority,  // priority (int)
             $title,     // title (string)
-            $assignedTo,// Assigned to ??
             $cron,      // cron (string)
             $id // Id(int)
         );
         $stmt->execute();
-        if ($stmt->affected_rows > 0) {
+
+        // Delete all existing task_assignees
+        $stmtDeleteExistingAssignees = $con->prepare("delete from task_assignees where event_id = ?");
+        $stmtDeleteExistingAssignees->bind_param("i", $id);
+        $stmtDeleteExistingAssignees->execute();
+
+        $taskAssigneesCreated = createTaskAssignessEntry($id, $assignees);
+
+        if ($stmt->affected_rows > 0 && $taskAssigneesCreated) {
             $row = fetchRecord($id);
             echo json_encode(["status" => true, "isEdit" => true, "data" => parseRow($row)]);
 
@@ -104,6 +121,22 @@ function fetchRecord($recordId)
     $result = $stmt2->get_result();
     $row = $result->fetch_assoc();
     return $row;
+}
+
+function createTaskAssignessEntry($eventId, $assigneesList)
+{
+    global $con;
+    $assignee_query = "INSERT INTO task_assignees(assignee , event_id) values (? , ?)";
+
+
+    $stmt = $con->prepare($assignee_query);
+    foreach ($assigneesList as $assignee) {
+        $stmt->bind_param("ii", $assignee, $eventId);
+        $stmt->execute();
+
+    }
+
+    return $stmt->affected_rows;
 }
 
 function updateStatus($id, $status)

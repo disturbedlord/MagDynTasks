@@ -1,7 +1,9 @@
+<link rel="stylesheet" href="../Stylesheet/TaskModal.css">
+
 <!-- Modal backdrop -->
 <div id="TaskModal" class="p-2 fixed inset-0 bg-black/80 flex items-center justify-center hidden z-40 overflow-auto">
     <!-- Modal container -->
-    <div class="py-2 bg-white rounded-lg shadow-lg w-full max-w-md relative max-h-[90vh] flex flex-col">
+    <div class="py-2 bg-white rounded-lg shadow-lg w-full max-w-md relative h-[70%] flex flex-col">
 
         <!-- Close button -->
         <button id="closeTaskModal"
@@ -9,29 +11,21 @@
 
         <!-- Modal title -->
         <div class="flex flex-row items-center py-2 px-6 justify-start">
-            <h2 id="modalTitle" class="text-xl font-semibold">Add Task</h2>
+            <h2 id="modalTitle" class="text-xl font-semibold"></h2>
         </div>
         <hr class="border-t border-gray-300">
 
         <!-- Scrollable content -->
         <div class="px-6 py-2 overflow-auto flex-1">
             <form id="TaskForm" class="space-y-4">
-                <!-- Title
-                <div>
-                    <label for="title" class="block text-gray-700 font-medium mb-1">Title <span
-                            class="text-red-500">*</span></label>
-                    <input id="title" name="title" type="text" maxlength="250" value=""
-                        class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Enter task title" required>
-                </div> -->
 
                 <!-- Description -->
                 <div>
                     <label for="description" class="block text-gray-700 font-medium mb-1">Task <span
                             class="text-red-500">*</span></label>
                     <textarea id="task" name="description" rows="3"
-                        class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Enter task description" required></textarea>
+                        class="w-full border border-gray-300 rounded-md px-3 py-2"
+                        placeholder="Enter task description"></textarea>
 
                     <div class="text-sm text-end text-gray-500" id="descriptionLengthCounter">0 / 250 characters</div>
                 </div>
@@ -62,36 +56,66 @@
                     </select>
                 </div>
 
-                <!-- Department
-                <div>
-                    <label for="department" class="block text-gray-700 font-medium mb-1">Department <span
-                            class="text-red-500">*</span></label>
-                    <input id="department" name="department" type="text"
-                        class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required>
-                </div> -->
-
                 <!-- User -->
-                <div>
-                    <label for="user" class="block text-gray-700 font-medium mb-1">User <span
-                            class="text-red-500">*</span></label>
-                    <?php if ($is_admin): ?>
-                        <select id="user" name="user"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="" selected disabled>Select User</option>
-                            <?php foreach ($allUsers as $row): ?>
-                                <option value="<?= $row['uid'] ?>">
-                                    <?= $row['first_name'] ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    <?php else: ?>
-                        <select id="user" name="user"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="<?= $user_id ?>"><?= $user_name ?></option>
-                        </select>
-                    <?php endif; ?>
 
+
+                <div class="flex-1 w-full">
+                    <div class="relative">
+                        <label for="description" class="block text-gray-700 font-medium mb-1">Assignees <span
+                                class="text-red-500">*</span></label>
+                        <!-- BUTTON -->
+                        <button id="TaskUserBtn" type="button" class="inline-flex justify-between items-center w-full px-3 py-2 text-sm bg-white border
+                            border-gray-300 rounded-md focus:outline-none disabled:bg-gray-200">
+
+                            <span id="taskSelectedUser" class="text-gray-700">Select Users</span>
+                            <div class="flex flex-row space-x-2">
+                                <span id="clearTaskUserBtn"
+                                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-xs font-medium px-1.5 py-0.5 rounded">Clear</span>
+
+
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </button>
+
+                        <!-- DROPDOWN -->
+                        <div id="dropdown-menu-TaskUserBtn"
+                            class="hidden absolute right-0 mt-2 w-full bg-white rounded-md  ring-1 ring-black/10 z-50">
+
+                            <!-- Search -->
+                            <div class="p-2 border-b">
+                                <input id="search-input-TaskUserBtn"
+                                    class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none"
+                                    type="text" placeholder="Search users">
+                            </div>
+
+                            <!-- LIST -->
+                            <ul id="dropdown-list-TaskUserBtn" class="max-h-40 overflow-y-auto p-2 space-y-1 text-sm">
+
+                                <?php foreach ($allUsers as $row): ?>
+
+                                    <li>
+                                        <label
+                                            class="flex items-center gap-2 px-2 py-1 hover:bg-gray-100 rounded cursor-pointer">
+                                            <input type="checkbox" data-type="userSelection1"
+                                                class="user-checkbox-task w-4 h-4 border-2 border-gray-600 rounded-sm bg-white checked:bg-gray-800 checked:border-gray-800 focus:ring-0"
+                                                value="<?= $row['uid'] ?>" data-name="<?= $row['first_name'] ?>">
+                                            <span>
+                                                <?= $row['first_name'] ?>
+                                            </span>
+                                        </label>
+                                    </li>
+                                <?php endforeach; ?>
+
+                            </ul>
+                        </div>
+
+
+                    </div>
                 </div>
 
 
@@ -112,6 +136,11 @@
 </div>
 
 <script>
+    const checkboxesTask = document.querySelectorAll('.user-checkbox-task');
+    const selectedTextTask = document.getElementById("taskSelectedUser");
+    const dropdownBtnUserSelection = document.getElementById('TaskUserBtn');
+    const dropdownMenuUserSelection = document.getElementById('dropdown-menu-TaskUserBtn');
+
     document.addEventListener('DOMContentLoaded', (element) => {
 
         const modal = document.getElementById('TaskModal');
@@ -123,22 +152,61 @@
         const descriptionCounter = $("#descriptionLengthCounter");
 
 
+        // Toggle User Selection dropdown
+        dropdownBtnUserSelection?.addEventListener('click', () => {
+            console.log("Clicked user");
+            dropdownMenuUserSelection.classList.toggle('hidden');
+        });
+        document.addEventListener('click', (e) => {
+            if (!dropdownBtnUserSelection?.contains(e.target) && !dropdownMenuUserSelection?.contains(e.target)) {
+                dropdownMenuUserSelection?.classList.add('hidden');
+            }
+        });
+
+        // Listen to user checkbox changes
+        checkboxesTask.forEach(cb => {
+            cb.addEventListener('change', updateSelectedUser);
+        });
+
+        document.getElementById('search-input-TaskUserBtn')?.addEventListener('input', function () {
+            const val = this.value.toLowerCase();
+
+            document.querySelectorAll('#dropdown-list-TaskUserBtn li')?.forEach(li => {
+                li.style.display = li.innerText.toLowerCase().includes(val)
+                    ? ''
+                    : 'none';
+            });
+        });
+
 
         // Listen to textarea Description and update count
         description.addEventListener("input", (e) => {
+            let hasError = false;
+            if ([`'`, `"`].includes(e.data) || e.target.value.includes("'") || e.target.value.includes('"')) {
+                triggerError("task");
+                hasError = true;
+            }
             const enteredValue = e.target.value;
             if (typeof enteredValue === "string") {
                 const setLength = setDescriptionCounter(enteredValue);
                 if (setLength > 250) {
                     descriptionCounter.css("color", "#ef4646");
-                    $("#submitBtn").prop("disabled", true);
+                    triggerError("task")
+
+
                 } else {
                     descriptionCounter.css("color", "black");
-                    $("#submitBtn").prop("disabled", false);
-
+                    if (!hasError) {
+                        $("#task").addClass("border-gray-300")
+                        $("#task").removeClass("border-red-500")
+                    }
                 }
             }
 
+            if (hasError)
+                $("#submitBtn").prop("disabled", true);
+            else
+                $("#submitBtn").prop("disabled", false);
         })
 
         const setDescriptionCounter = (value) => {
@@ -167,24 +235,56 @@
 
         const closeBtns = [document.getElementById('closeTaskModal'), document.getElementById('closeTask')];
 
+
+
         openBtn?.addEventListener('click', () => {
 
             modal.classList.remove('hidden');
             modal.dataset.mode = 'addTask';
+            $("#modalTitle").text("Add Task")
             // set default value to input and textarea
-            modal.querySelectorAll('input , textarea').forEach((element) => {
+            modal.querySelectorAll('input[type="text"] , textarea').forEach((element) => {
                 element.value = '';
             });
+
+            checkboxesTask.forEach(cb => {
+                cb.checked = false;
+            })
+
+            updateSelectedUser();
+
             descriptionCounter.css("color", "black");
+            $("#task").addClass("border-gray-300")
+            $("#task").removeClass("border-red-500")
             cronValidator.innerText = "";
             // set default value to select
-            modal.querySelector('#user').value = '';
+            modal.querySelector('#TaskUserBtn').value = '';
             modal.querySelector('#priority').value = 1;
 
             // In case of non admin user set the non-admin user set by default
             const user = window?.xoid?.user?.value?.value;
             if (!user?.isAdmin) {
                 $("#user").val(user?.id)
+            }
+
+
+            const isAdmin = window?.xoid?.user?.value?.value?.isAdmin === 1;
+            if (!isAdmin) {
+                // disable userSelectioon
+
+                $("#TaskUserBtn").attr("disabled", true);
+
+                $("#clearTaskUserBtn").addClass("disabled");
+
+                // set Default as logged in user
+
+                const loggedInUser = window?.xoid?.user?.value?.value?.id;
+                document.querySelectorAll("input[data-type='userSelection1']").forEach(cb => {
+                    cb.checked = parseInt(cb.value) === loggedInUser
+                });
+
+                updateSelectedUser();
+
             }
 
         });
@@ -203,15 +303,31 @@
             }
         });
 
+        $("#clearTaskUserBtn").on("click", (e) => {
+
+            if ($("#clearTaskUserBtn").hasClass('disabled')) {
+                e.preventDefault();
+                return false;
+            }
+            $("#taskSelectedUser").val("");
+            $("#taskSelectedUser").text("Select Users");
+            $("#taskSelectedUser").attr("data-selectedids", "");
+
+            // Clear all checkboxes
+            checkboxesTask.forEach(cb => {
+                cb.checked = false;
+            });
+            e.stopPropagation(); // Prevent parent click
+        })
+
         form.addEventListener('submit', (e) => {
             e.preventDefault(); // prevent page reload
-
 
 
             const description = document.getElementById('task').value.trim();
             const cron = document.getElementById('cron').value.trim();
             const priority = document.getElementById('priority').value;
-            const user = document.getElementById('user').value;
+            const user = document.getElementById('taskSelectedUser').getAttribute("data-selectedids") ?? null;
             const title = document.getElementById('task').value;
             const caller = modal.dataset.mode;
             let isEditThenId = 0;
@@ -219,18 +335,24 @@
                 isEditThenId = modal.dataset.id;
             }
 
-            if (!description || !user) {
-                alert("User is required");
+            if (!description || !user || user.length === 0) {
+                if (!description)
+                    triggerError("task");
+                if (user === null || user.length === 0)
+                    triggerError("TaskUserBtn");
+
                 return;
             }
 
+            $("#loader").toggleClass("hidden");
+            $("#loaderText").text("Saving");
             // send via fetch to your PHP handler
             fetch('../Modal/events.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: `action=${caller}&description=${encodeURIComponent(description)}&cron=${encodeURIComponent(cron)}&priority=${priority}&user=${user}&title=${encodeURIComponent(title)}${caller === "editTask" ? `&id=${isEditThenId}` : ''}`
+                body: `action=${caller}&description=${encodeURIComponent(description)}&cron=${encodeURIComponent(cron)}&priority=${priority}&assignees=${user}&title=${encodeURIComponent(title)}${caller === "editTask" ? `&id=${isEditThenId}` : ''}`
             })
                 .then(res => res.json())
                 .then(data => {
@@ -247,7 +369,7 @@
 
                         } else {
                             // persist user across add task
-                            const lastSetUser = $("#user").val();
+                            const lastSetUser = $("#taskSelectedUser").attr("data-selectedids")?.split(",");
                             // optionally reset form
                             form.reset();
                             // reset description textarea count
@@ -255,8 +377,14 @@
                             cronValidator.style.display = "none";
 
                             // Set lastSetUser
-                            $("#user").val(lastSetUser);
+                            document.querySelectorAll("input[data-type='userSelection1']").forEach(cb => {
+                                cb.checked = lastSetUser.includes(cb.value)
+                            });
+
+                            updateSelectedUser();
                         }
+                        $("#loader").toggleClass("hidden");
+
                         // reload whole table view
                         reloadView();
 
@@ -271,25 +399,65 @@
         });
     });
 
+    // Update selected text
+    function updateSelectedUser() {
+
+
+
+        const selected = [...checkboxesTask]
+            .filter(cb => cb.checked)
+            .map(cb => cb.dataset.name);
+
+        const selectedIds = [...checkboxesTask]
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+
+        if (selectedTextTask) {
+            if (selected.length === 0) {
+                selectedTextTask.innerText = "Select Users";
+            } else {
+                selectedTextTask.innerText = selected.join(', ');
+            }
+            let existingSelectedIds = selectedTextTask.getAttribute("data-selectedids") ?? "";
+            existingSelectedIds = selectedIds;
+            selectedTextTask.setAttribute("data-selectedids", existingSelectedIds);
+        }
+
+        $("#TaskUserBtn").removeClass("border-red-500");
+
+    }
+
+
     const PopulateTasks = (row) => {
         const rowIndex = $(row).prevAll("tr").length - 1;
         const pageNo = $(row).data("page");
 
         const modal = document.getElementById("TaskModal");
         modal.dataset.mode = "editTask";
+        $("#modalTitle").text("Edit Task")
         modal.dataset.id = row.dataset.id;
         modal.dataset.pageNo = pageNo;
         modal.dataset.rowIndex = rowIndex;
 
         modal.classList.remove("hidden");
 
+        $("#task").addClass("border-gray-300")
+        $("#task").removeClass("border-red-500")
+
         // prefill
         document.getElementById("task").value =
             row.dataset.task || "";
         document.getElementById("priority").value = row.dataset.priority || "1";
-        document.getElementById("user").value = row.dataset.assignee || "";
+        const assignees = row.dataset.assignee?.split(",") || "";
         document.getElementById("cron").value = row.dataset.cron || "";
         const description = document.getElementById("task");
+
+        document.querySelectorAll("input[data-type='userSelection1']").forEach(cb => {
+            cb.checked = assignees.includes(cb.value);
+        });
+
+        updateSelectedUser();
 
         const descCounter = document.getElementById("descriptionLengthCounter");
         descCounter.innerText = `${description.value.length} / 250`;
@@ -318,5 +486,40 @@
             cronValidator.innerText =
                 cronField.value !== "" ? cronToShortText(cronField.value) : "";
         }
+        let hasError = false;
+
+        if (description.value.includes("'") || description.value.includes('"')) {
+            triggerError("task");
+            hasError = true;
+        }
+
+        if (hasError)
+            $("#submitBtn").prop("disabled", true);
+        else
+            $("#submitBtn").prop("disabled", false);
+
+        // disable user selection programitically
+        const isAdmin = window?.xoid?.user?.value?.value?.isAdmin === 1;
+        if (!isAdmin) {
+            $("#TaskUserBtn").attr("disabled", true);
+            // Prevent clear from working
+            $("#clearTaskUserBtn").addClass("disabled");
+        }
+    }
+
+    function triggerError(element) {
+        const input = document.getElementById(element);
+
+        // Add red border
+        input.classList.remove('border-gray-300');
+        input.classList.add('border-red-500');
+
+        // Trigger shake
+        input.classList.add('shake');
+
+        // Remove shake after 500ms so it can re-trigger later
+        setTimeout(() => {
+            input.classList.remove('shake');
+        }, 500);
     }
 </script>

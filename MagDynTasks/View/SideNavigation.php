@@ -24,9 +24,10 @@
     <div id="menuBtns" class="flex-1 overflow-y-auto p-4">
         <!-- future menu items go here -->
 
-        <button type="button" id="HomePage" onclick="window.location.href='HomePage.php'"
-            class="my-2 w-full text-black bg-neutral-primary border border-brand  leading-5 rounded-lg text-base px-3 py-1.5 focus:outline-none">Tasks</button>
+        <!-- <button type="button" id="HomePage" onclick="window.location.href='HomePage.php'"
+            class="my-2 w-full text-black bg-neutral-primary border border-brand  leading-5 rounded-lg text-base px-3 py-1.5 focus:outline-none">Tasks</button> -->
 
+        <?php require "../Templates/SideBarMenuItems.php" ?>
 
     </div>
 
@@ -41,6 +42,7 @@
 </div>
 
 <script>
+
     document.addEventListener(
         "DOMContentLoaded",
 

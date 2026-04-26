@@ -87,7 +87,7 @@ while ($row = $allUsersResult->fetch_assoc()) {
                     <div class="text-sm">Loading more data</div>
                 </div>
 
-                <table class="table ">
+                <table class="table w-full">
                     <tbody class="item-list" id="scroll-content"></tbody>
                 </table>
 

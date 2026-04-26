@@ -114,7 +114,7 @@ $("#exportCSV").click(async () => {
           row[9], // Date
           row[4], // Priority
           row[11], // Created By
-          row[10], // Assigned To
+          row[13].join(), // Assigned To
         ].map(function (cell) {
           // Escape cell: wrap in quotes, escape inner quotes
           const val = String(cell ?? "").replace(/"/g, '""');
