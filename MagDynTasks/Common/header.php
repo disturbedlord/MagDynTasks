@@ -13,3 +13,7 @@
 <script src="../Script/clusterize.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+
+<!-- DateTime Picker (FlatPickr Library) -->
+<link rel="stylesheet" href="../Stylesheet/flatPickr.css">
+<script src="../Script/flatPickr.js"></script>

@@ -56,6 +56,21 @@
                     </select>
                 </div>
 
+
+                <!-- Due Date Picker -->
+                <div>
+                    <label for="description" class="block text-gray-700 font-medium mb-1">Due Date <span
+                            class="text-red-500">*</span></label>
+                    <div
+                        class="flex justify-between w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input class="w-full" id="dueDate" placeholder="yyyy-mm-dd" type="text">
+                        <div id="calendarIcon" class="cursor-pointer">
+                            <i class="fa-regular fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+
+
                 <!-- User -->
 
 
@@ -118,7 +133,6 @@
                     </div>
                 </div>
 
-
                 <!-- Hidden ID for edit mode -->
                 <input type="hidden" id="taskId" name="id" value="">
             </form>
@@ -142,6 +156,8 @@
     const dropdownMenuUserSelection = document.getElementById('dropdown-menu-TaskUserBtn');
 
     document.addEventListener('DOMContentLoaded', (element) => {
+
+
 
         const modal = document.getElementById('TaskModal');
         const openBtn = document.getElementById('openModalBtn'); // your open button
@@ -239,6 +255,8 @@
 
         openBtn?.addEventListener('click', () => {
 
+            InitializeDatePicker();
+
             modal.classList.remove('hidden');
             modal.dataset.mode = 'addTask';
             $("#modalTitle").text("Add Task")
@@ -330,6 +348,7 @@
             const user = document.getElementById('taskSelectedUser').getAttribute("data-selectedids") ?? null;
             const title = document.getElementById('task').value;
             const caller = modal.dataset.mode;
+            const dueDate = $("#dueDate").val();
             let isEditThenId = 0;
             if (caller === "editTask") {
                 isEditThenId = modal.dataset.id;
@@ -352,7 +371,7 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: `action=${caller}&description=${encodeURIComponent(description)}&cron=${encodeURIComponent(cron)}&priority=${priority}&assignees=${user}&title=${encodeURIComponent(title)}${caller === "editTask" ? `&id=${isEditThenId}` : ''}`
+                body: `action=${caller}&description=${encodeURIComponent(description)}&cron=${encodeURIComponent(cron)}&priority=${priority}&assignees=${user}&title=${encodeURIComponent(title)}${caller === "editTask" ? `&id=${isEditThenId}` : ''}&dueDate=${dueDate}`
             })
                 .then(res => res.json())
                 .then(data => {
@@ -398,6 +417,20 @@
                 });
         });
     });
+
+    const InitializeDatePicker = () => {
+        // Set to null on each render
+        $("#dueDate").val("");
+        // Initialize Date Picker in Task Modal
+        $("#dueDate").flatpickr({
+            disableMobile: true
+        });
+
+        // On Calendar icon click event forward event to input
+        document.getElementById("calendarIcon").addEventListener("click", () => {
+            document.getElementById("dueDate").click();
+        });
+    }
 
     // Update selected text
     function updateSelectedUser() {
@@ -445,6 +478,7 @@
         $("#task").addClass("border-gray-300")
         $("#task").removeClass("border-red-500")
 
+        InitializeDatePicker();
         // prefill
         document.getElementById("task").value =
             row.dataset.task || "";
@@ -458,6 +492,14 @@
         });
 
         updateSelectedUser();
+
+        // Set Due Date
+        // Get Due Date from dataset
+        const dueDate = row.dataset.duedate;
+        if (dueDate) {
+            // set in input field
+            $("#dueDate").val(dueDate);
+        }
 
         const descCounter = document.getElementById("descriptionLengthCounter");
         descCounter.innerText = `${description.value.length} / 250`;

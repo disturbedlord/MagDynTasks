@@ -12,12 +12,18 @@ function parseRow($row)
     $creatorId = $row["user_account_id"];
     $assigneeId = $row["department"];
     $date = date("d-m-y", strtotime($row['time']));
-
+    $dueDate = $row["due_date"];
     $assignees = explode(",", $row["assignees"]);
     $assigneesId = explode(",", $row["assigneesId"]);
     // 🕒 Format time
     $time = date("d M, g:i A", strtotime($row['time']));
-    ;
+
+    // Check if Past Due Date
+    if ($dueDate) {
+        $isPastDueDate = strtotime($dueDate) > time() ? false : true;
+        $dueDate = date("Y-m-d", strtotime($dueDate));
+    }
+
     $priority = $row['priority_id'];
     $department = $row["department"];
     // 🎨 Status color
@@ -47,7 +53,8 @@ function parseRow($row)
         $assginee,
         $name,
         $assigneesId,
-        $assignees
+        $assignees,
+        $dueDate
     ];
 }
 

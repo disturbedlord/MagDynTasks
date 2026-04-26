@@ -26,13 +26,20 @@
 
 
 
-                    <div class="flex flex-row justify-between">
+                    <div class="flex flex-row space-x-2">
 
                         <!-- status -->
                         <span
                             class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium inset-ring capitalize <?= $statusColor ?>">
                             <?= htmlspecialchars($status) ?>
                         </span>
+                        <!-- Due Date -->
+                        <?php if ($dueDate): ?>
+                            <span
+                                class="inline-flex items-center rounded-md  px-2 py-1 text-xs <?= !$isPastDueDate ? "font-medium text-gray-600 bg-gray-100" : "font-bold text-red-700 bg-red-50" ?> inset-ring inset-ring-red-600/10">
+                                <?= !$isPastDueDate ? $dueDate : "Over Due" ?>
+                            </span>
+                        <?php endif ?>
                     </div>
 
                     <?php require "TaskAssignment.php" ?>

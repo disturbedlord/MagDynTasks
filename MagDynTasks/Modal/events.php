@@ -36,20 +36,22 @@ switch ($action) {
         $time = date("Y-m-d H:i:s"); // current timestamp
         $department = $_POST['assignees'];
         $assigneesList = explode(",", $department);
+        $dueDate = $_POST["dueDate"];
 
         $queriesExecuted = 0;
         // echo $task . "<br/>" . $cron . "<br/>" . $priority . "<br/>" . $user . "<br/>" . $title . "<br/>" . $done . "<br/>" . $time . "<br/>" . $department;
-        $stmt = $con->prepare("INSERT INTO events(uid , description , done , time , priority , title , cron) VALUES(?,?,?,?,?,?,?)");
+        $stmt = $con->prepare("INSERT INTO events(uid , description , done , time , priority , title , cron , due_date) VALUES(?,?,?,?,?,?,?,?)");
         // bind parameters
         $stmt->bind_param(
-            "isissss",
+            "isisssss",
             $user,       // uid (int)
             $task,       // description (string)
             $done,       // done (int)
             $time,       // time (string)
             $priority,   // priority (string) → s
             $title,      // title (string)
-            $cron        // cron (string)
+            $cron,        // cron (string)
+            $dueDate    // DueDate (string)
         );
         $dbCall = $stmt->execute();
         $eventId = $stmt->insert_id;
@@ -72,11 +74,13 @@ switch ($action) {
         $title = $_POST["title"];
         $done = 0;
         $time = date("Y-m-d H:i:s"); // current timestamp
+        $dueDate = $_POST["dueDate"];
+
         // Update Events
-        $stmt = $con->prepare("Update events set uid=? , description=? , done=? , time=? , priority=? , title=? , cron=? WHERE id=?");
+        $stmt = $con->prepare("Update events set uid=? , description=? , done=? , time=? , priority=? , title=? , cron=?  , due_date = ? WHERE id=?");
         // bind parameters
         $stmt->bind_param(
-            "isissssi", // types: i=int, s=string
+            "isisssssi", // types: i=int, s=string
             $createdBy,      // uid (int)
             $description,      // description (string)
             $done,      // done (int)
@@ -84,6 +88,7 @@ switch ($action) {
             $priority,  // priority (int)
             $title,     // title (string)
             $cron,      // cron (string)
+            $dueDate,    // DueDate(string)
             $id // Id(int)
         );
         $stmt->execute();

@@ -4,6 +4,7 @@ SELECT
     e.title,
     e.id,
     e.description,
+    e.due_date,
     e.done,
     CASE 
         WHEN e.done = 0 THEN 'pending' 

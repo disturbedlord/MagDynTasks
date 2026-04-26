@@ -136,6 +136,7 @@ const renderRow = (row, data, pageNo) => {
   TR.attr("data-priority", data[4]);
   TR.attr("data-creator", data[5]);
   TR.attr("data-assignee", data[12]);
+  TR.attr("data-dueDate", data[14]);
 
   TR.attr("data-cron", data[6]);
   TR.attr("data-department", data[7]);
