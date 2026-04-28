@@ -91556,3 +91556,1584 @@ FROM events e
 LEFT JOIN user_account d 
  ON d.user_account_id = e.uid
  LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => test
+            [status] => 
+            [priority] => 
+            [uid] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  WHERE  e.title LIKE  ?  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+    [0] => %test%
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id  WHERE  e.title LIKE  ? 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => test222
+            [status] => 
+            [priority] => 
+            [uid] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  WHERE  e.title LIKE  ?  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+    [0] => %test222%
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id  WHERE  e.title LIKE  ? 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => test222
+            [status] => 
+            [priority] => 
+            [uid] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  WHERE  e.title LIKE  ?  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+    [0] => %test222%
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id  WHERE  e.title LIKE  ? 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [uid] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
+Array
+(
+    [start] => 0
+    [length] => 20
+    [loggedInUserId] => 51
+    [isAdmin] => 1
+    [filter] => Array
+        (
+            [title] => 
+            [sortByDate] => 1
+            [sortDate] => 0
+            [sortByPriority] => 0
+            [sortPriority] => 0
+        )
+
+)
+
+
+SELECT 
+    e.title,
+    e.id,
+    e.description,
+    e.due_date,
+    e.done,
+    CASE 
+        WHEN e.done = 0 THEN 'pending' 
+        WHEN e.done = 1 THEN 'finished'
+    END AS status,
+    DATE(e.time) AS date,
+    e.time,
+    e.priority AS priority_id,
+    d.first_name AS user_name,
+    d.user_account_id,
+    e.department,
+    e.cron , 
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+
+FROM events e 
+LEFT join task_assignees ta
+	ON ta.event_id = e.id
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+LEFT JOIN user_account d2
+ON d2.user_account_id = ta.assignee  GROUP BY e.id  ORDER BY e.time DESC  LIMIT 0 , 20 
+Array
+(
+)
+
+
+SELECT 
+    count(*) AS TOTAL
+FROM events e
+LEFT JOIN user_account d 
+ ON d.user_account_id = e.uid
+ LEFT JOIN user_account d2 on e.department = d2.user_account_id 
