@@ -64,6 +64,23 @@ document.addEventListener(
     menuBtn.addEventListener("click", openMenu);
     closeBtn.addEventListener("click", closeMenu);
     overlay.addEventListener("click", closeMenu);
+
+    const sendBtn = $("#sendBtn");
+    const options = $("#options");
+    $("#searchBar").click(() => {
+      options.hide();
+      if (sendBtn.hasClass("hidden")) sendBtn.toggleClass("hidden");
+    });
+
+    $("#searchBar").on("blur", function () {
+      // Check if query is empty ? if yes defer and remove sendBtn from DOM
+      if ($("#searchBar").val().length === 0) {
+        setTimeout(() => {
+          options.show();
+          sendBtn.toggleClass("hidden");
+        }, 100);
+      }
+    });
   },
   false,
 );

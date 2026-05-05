@@ -17,15 +17,15 @@ SELECT
     d.user_account_id,
     e.department,
     e.cron , 
-    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees,
-    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId
+    COALESCE(GROUP_CONCAT(d2.first_name SEPARATOR ','), '') AS assignees, 
+    COALESCE(GROUP_CONCAT(d2.user_account_id SEPARATOR ','), '') AS assigneesId 
 
-FROM events e 
-LEFT join task_assignees ta
-	ON ta.event_id = e.id
-LEFT JOIN user_account d 
- ON d.user_account_id = e.uid
-LEFT JOIN user_account d2
+FROM events e  
+LEFT join task_assignees ta 
+	ON ta.event_id = e.id 
+LEFT JOIN user_account d  
+ ON d.user_account_id = e.uid  
+LEFT JOIN user_account d2 
 ON d2.user_account_id = ta.assignee ";
 
 $EVENTQUERYCOUNT = "

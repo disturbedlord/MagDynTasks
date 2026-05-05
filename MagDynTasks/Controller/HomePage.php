@@ -50,13 +50,21 @@ while ($row = $allUsersResult->fetch_assoc()) {
         <div class="h-full flex flex-row items-center justify-between px-2">
 
             <!-- MENU BUTTON -->
-            <button id="menuBtn" class="w-12 h-12 rounded-md bg-gray-200">
+            <button id="menuBtn" class="w-12 flex-none h-12 rounded-md bg-gray-200">
                 <i class="bi bi-list text-2xl"></i>
             </button>
 
-            <div id="output"></div>
 
-            <div class="flex flex-row space-x-2">
+
+            <!-- Search Bar -->
+            <div class="w-full px-2 mx-2 border flex flex-row items-center rounded-lg border-gray-200">
+                <input type="text" id="searchBar" class=" w-full  py-2 " placeholder="Search Tasks" />
+            </div>
+            <div id="sendBtn" class="hidden w-10 h-10 rounded-full bg-black flex justify-center items-center shadow">
+                <i class="fa-regular fa-paper-plane text-white px-5"></i>
+            </div>
+
+            <div id="options" class="flex flex-row space-x-2">
                 <button id="exportCSV"
                     class="w-12 h-12 flex justify-center items-center bg-gray-200 text-black p-3 rounded-md">
 
@@ -122,9 +130,8 @@ while ($row = $allUsersResult->fetch_assoc()) {
         </div>
         <!-- Floating Add Task Button -->
 
+
     </div>
-
-
 
     <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-2 w-[calc(100vw-10vw)]"></div>
     <script type="module" src="../Script/Xoid.js"></script>
@@ -135,6 +142,7 @@ while ($row = $allUsersResult->fetch_assoc()) {
     <script src="../Script/listswipe.js"></script>
     <script src="../Script/InfiniteScroll.js"></script>
     <script src="../Script/HomePage.js"></script>
+    <script src="../Script/globalSearchBar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 
     <?php require "../View/TaskModal.php";

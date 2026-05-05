@@ -5,7 +5,8 @@ let allRows = []; // visible window of rows fed to Clusterize
 let clusterize = undefined;
 let scrollReached = false;
 let totalPages = 0;
-
+let source = ""; // store source
+let prevSource = "";
 const pageHeightCache = new Map(); // add this with your other globals
 
 // ── Spacer state ──────────────────────────────────────────────────────────────
@@ -86,35 +87,72 @@ const getFilters = () => {
 };
 
 async function fetchPage(pageIndex) {
-  if (pageCache.has(pageIndex)) return pageCache.get(pageIndex);
-  const user = window?.xoid?.user?.value?.value;
+  let res;
+  switch (source) {
+    case "global": {
+      if (pageCache.has(pageIndex)) return pageCache.get(pageIndex);
+      const user = window?.xoid?.user?.value?.value;
 
-  const res = await $.ajax({
-    url: "../Modal/fetchTable.php",
-    method: "GET",
-    complete: function (data) {
-      if (!$("#loader").hasClass("hidden")) $("#loader").toggleClass("hidden");
+      res = await $.ajax({
+        url: "../Modal/fetchTable.php",
+        method: "GET",
+        complete: function (data) {
+          if (!$("#loader").hasClass("hidden"))
+            $("#loader").toggleClass("hidden");
 
-      if (isFilterApplied) {
-        showToast("Filter applied successfully!", "success");
-        isFilterApplied = false;
-        reloadTable(true);
-      }
+          if (isFilterApplied) {
+            showToast("Filter applied successfully!", "success");
+            isFilterApplied = false;
+            reloadTable(true);
+          }
 
-      if (data) {
-        const recordCount = data?.responseJSON?.recordsFiltered;
-        $("#recordsCount").text(`${recordCount} Records`);
-      }
-    },
-    data: {
-      start: pageIndex * pageSize,
-      length: pageSize,
-      loggedInUserId: user?.id,
-      isAdmin: user?.isAdmin,
-      filter: getFilters(),
-    },
-  });
+          if (data) {
+            const recordCount = data?.responseJSON?.recordsFiltered;
+            $("#recordsCount").text(`${recordCount} Records`);
+          }
+        },
+        data: {
+          start: pageIndex * pageSize,
+          length: pageSize,
+          loggedInUserId: user?.id,
+          isAdmin: user?.isAdmin,
+          filter: getFilters(),
+        },
+      });
+      break;
+    }
+    case "searchBar": {
+      const searchQuery = $("#searchBar").val();
 
+      res = await $.ajax({
+        url: "../Modal/searchBar.php",
+        method: "GET",
+        complete: function (data) {
+          if (typeof data === "string") {
+            data = JSON.parse(data);
+          }
+          if (!$("#loader").hasClass("hidden"))
+            $("#loader").toggleClass("hidden");
+          showToast("Search applied successfully!", "success");
+          isFilterApplied = false;
+          reloadTable(true);
+
+          if (data) {
+            const recordCount = data?.responseJSON?.recordsFiltered;
+            $("#recordsCount").text(`${recordCount} Records`);
+          }
+        },
+        data: {
+          page: pageIndex * pageSize,
+          query: searchQuery,
+        },
+      });
+    }
+  }
+  if (typeof res === "string") {
+    res = JSON.parse(res);
+  }
+  prevSource = source;
   totalRecords = res.recordsFiltered;
   pageCache.set(pageIndex, res.data);
   return res.data;
@@ -150,9 +188,25 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function loadNextPage(direction, options = {}) {
+async function loadNextPage(direction, options) {
   const scrollEl = document.getElementById("scroll-container");
   let pageToFetch = 0;
+  if ($("#searchBar").val().length > 0) {
+    // Clear Filter
+
+    // SetFilter(true);
+    // StoreFilter.setFilter({});
+
+    source = "searchBar";
+    TableReload(false);
+  } else {
+    source = "global";
+  }
+  if (prevSource !== source) {
+    // Source Changed
+    // Invalidate the Cache
+    TableReload(false);
+  }
   // reset banner
   switch (direction) {
     // ── Scroll DOWN ───────────────────────────────────────────────────────────
@@ -387,7 +441,7 @@ const attachRowCallback = () => {
   document.body.classList.remove("overflow-hidden");
 };
 
-const TableReload = () => {
+const TableReload = (flag = true) => {
   allRows = [
     `<tr id="top-spacer-row" style="height:0px;border:none;"><td></td></tr>`,
     `<tr id="bottom-spacer-row" style="height:0px;border:none;"><td></td></tr>`,
@@ -397,7 +451,7 @@ const TableReload = () => {
   pageCache.clear();
   totalRecords = 0;
   clusterize.update(allRows);
-  loadNextPage("down");
+  if (flag) loadNextPage("down");
 };
 
 $("#loadNext").on("click", () => loadNextPage("down"));
