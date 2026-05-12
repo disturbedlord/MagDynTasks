@@ -4,8 +4,7 @@ const inputField = document.querySelector("#searchBar");
 function handleInput() {
   const searchQuery = $("#searchBar").val();
   $("#loader").toggleClass("hidden");
-
-  loadNextPage("down");
+  loadSearchData();
 }
 
 // Attach the listener

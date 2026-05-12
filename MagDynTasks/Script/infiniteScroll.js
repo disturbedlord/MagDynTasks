@@ -128,18 +128,20 @@ async function fetchPage(pageIndex) {
         url: "../Modal/searchBar.php",
         method: "GET",
         complete: function (data) {
-          if (typeof data === "string") {
-            data = JSON.parse(data);
-          }
-          if (!$("#loader").hasClass("hidden"))
-            $("#loader").toggleClass("hidden");
-          showToast("Search applied successfully!", "success");
-          isFilterApplied = false;
-          reloadTable(true);
+          if (pageIndex === 0) {
+            if (typeof data === "string") {
+              data = JSON.parse(data);
+            }
+            if (!$("#loader").hasClass("hidden"))
+              $("#loader").toggleClass("hidden");
+            showToast("Search applied successfully!", "success");
+            isFilterApplied = false;
+            reloadTable(true);
 
-          if (data) {
-            const recordCount = data?.responseJSON?.recordsFiltered;
-            $("#recordsCount").text(`${recordCount} Records`);
+            if (data) {
+              const recordCount = data?.responseJSON?.recordsFiltered;
+              $("#recordsCount").text(`${recordCount} Records`);
+            }
           }
         },
         data: {
@@ -188,17 +190,50 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function loadNextPage(direction, options) {
-  const scrollEl = document.getElementById("scroll-container");
-  let pageToFetch = 0;
-  if ($("#searchBar").val().length > 0) {
+async function loadSearchData() {
+  let search = $("#searchBar").val();
+  if (search.length > 0) {
     // Clear Filter
 
     // SetFilter(true);
     // StoreFilter.setFilter({});
-
     source = "searchBar";
     TableReload(false);
+  } else {
+    source = "global";
+  }
+  if (prevSource !== source) {
+    // Source Changed
+    // Invalidate the Cache
+    TableReload(false);
+  }
+  const data = await fetchPage(0);
+  const newRows = data.map((row) => renderRow(row[8], row, 0));
+
+  allRows.splice(allRows.length - 1, 0, ...newRows);
+  clusterize.update(allRows);
+  if ($("tr[data-page]").length === 0) {
+    //   No Records, only top and bottom spacer
+    allRows.splice(1, 0, NoResult());
+    Repaint();
+  }
+
+  attachRowCallback();
+}
+
+async function loadNextPage(direction, options) {
+  const scrollEl = document.getElementById("scroll-container");
+  let pageToFetch = 0;
+  let search = $("#searchBar").val();
+  if (search.length > 0) {
+    // Clear Filter
+
+    // SetFilter(true);
+    // StoreFilter.setFilter({});
+    if (source === "global") {
+      source = "searchBar";
+      TableReload(false);
+    }
   } else {
     source = "global";
   }
@@ -218,6 +253,8 @@ async function loadNextPage(direction, options) {
         syncSpacers();
       }
       if (pageToFetch === -1) {
+        $("#loader").toggleClass("hidden");
+
         return;
       }
       const data = await fetchPage(pageToFetch);
